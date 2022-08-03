@@ -3,24 +3,15 @@
     <span class="monospace"
       ><strong><span class="primary">Non</span>technical Tech</strong></span
     >
-    <div style="margin: 0; padding: 0">
-      <button style="padding: 0.5em">
-        <i
-          data-feather="book"
-          style="width: 1em; height: 1em; display: block"
-        ></i>
+    <div class="button-container">
+      <button style="padding: 0.5rem">
+        <vue-feather type="book" stroke="var(--color)" size="1rem" />
       </button>
-      <button style="padding: 0.5em">
-        <i
-          data-feather="code"
-          style="display: block; width: 1em; height: 1em"
-        ></i>
+      <button style="padding: 0.5rem">
+        <vue-feather type="code" stroke="var(--color)" size="1rem" />
       </button>
-      <button class="secondary" style="padding: 0.5em">
-        <i
-          data-feather="github"
-          style="width: 1em; height: 1em; display: block"
-        ></i>
+      <button class="secondary" style="padding: 0.5rem">
+        <vue-feather type="github" stroke="var(--color)" size="1rem" />
       </button>
     </div>
   </nav>
@@ -28,9 +19,22 @@
 
 <script>
 export default {
-  /*mounted() {
-    feather.replace();
-  },*/
   name: "NavBar",
 };
 </script>
+
+<style>
+.button-container {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+button {
+  margin-left: 1em;
+  display: flex;
+  align-items: center;
+}
+
+</style>
