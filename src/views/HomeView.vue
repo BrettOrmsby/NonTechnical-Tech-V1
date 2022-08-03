@@ -14,20 +14,28 @@
 
     <h2><span class="primary">new</span> Article()</h2>
     <div class="card">
-      <h3 style="margin-bottom: 0.2em; margin-top: 0">This Is The Title</h3>
+      <h3 style="margin-bottom: 0.2em; margin-top: 0">{{ latest.name }}</h3>
       <div style="margin: 0">
-        <span class="tag" style="margin-bottom: 0">JavaScript</span>
-        <span class="tag" style="margin-bottom: 0">Scriptable</span>
+        <span
+          v-for="tag in latest.tags"
+          :key="tag"
+          class="tag"
+          style="margin-bottom: 0"
+          >{{ tag }}</span
+        >
       </div>
       <p>
-        <small>June, 7, 2022 <span class="primary">•</span> 15min read</small>
+        <small>
+          {{ latest.date }} <span class="primary">•</span>
+          {{ latest.readTime }}min read</small
+        >
         <br />
-        This is what the whole thing is about and only a quick simple example
-        sentance.
+        {{ latest.description }}
         <br />
         <a href="">Read</a>
       </p>
     </div>
+
     <button>View All</button>
 
     <h2><span class="primary">new</span> Project()</h2>
@@ -49,8 +57,16 @@
 <script>
 export default {
   name: "HomeView",
-  /*components: {
-    HelloWorld,
-  },*/
+  data() {
+    return {
+      articles: require("@/assets/blogStorage.json"),
+      loading: false,
+    };
+  },
+  computed: {
+    latest() {
+      return this.articles.articles[0];
+    },
+  },
 };
 </script>
