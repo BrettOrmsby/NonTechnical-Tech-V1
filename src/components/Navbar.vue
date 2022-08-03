@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar" id="navbar">
     <span class="monospace"
-      ><strong><span class="primary">Non</span>technical Tech</strong></span
+      ><strong><span class="primary">Non</span>Technical Tech</strong></span
     >
     <div class="button-container">
       <button style="padding: 0.5rem">

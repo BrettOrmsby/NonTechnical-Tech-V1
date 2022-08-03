@@ -7,7 +7,7 @@
       <a href="">Source</a>
     </div>
     <small style="display: block; text-align: center"
-      >Nontechnical Tech 2022 ©</small
+      ><span class="primary">Non</span>Technical Tech 2022 ©</small
     >
   </footer>
 </template>
