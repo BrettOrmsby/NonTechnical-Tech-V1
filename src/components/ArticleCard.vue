@@ -20,7 +20,9 @@
       <br />
       {{ article.description }}
       <br />
-      <a href="">Read</a>
+      <router-link :to="{ name: 'article', params: { id: article.id } }"
+        >Read</router-link
+      >
     </p>
   </div>
 </template>

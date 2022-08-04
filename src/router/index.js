@@ -13,6 +13,15 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "articles" */ "../views/ArticlesView.vue"),
   },
+  {
+    path: "/articles/:id",
+    name: "article",
+    props: true,
+    component: () =>
+      import(
+        /* webpackChunkName: "articles" */ "../views/ArticleRenderView.vue"
+      ),
+  },
 ];
 
 const router = createRouter({
