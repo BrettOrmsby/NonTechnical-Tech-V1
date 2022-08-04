@@ -101,7 +101,7 @@ span.monospace {font-family: "Source Code Pro", monospace;}
 }
 
 .container {
-  padding: calc(var(--container-padding)/2) var(--container-padding) 0 var(--container-padding);;
+  padding: var(--container-padding) var(--container-padding) 0 var(--container-padding);;
   margin: auto;
 }
 
@@ -122,7 +122,7 @@ h2 {
 }
 h1 {
   font-size: 2.5rem;
-  margin-top:1rem;
+  margin-top:2rem;
   text-align: center;
 }
 h1,

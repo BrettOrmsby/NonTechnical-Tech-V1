@@ -1,5 +1,27 @@
 <template>
-  <div class="container" v-html="md2html"></div>
+  <div class="container">
+    <h1>{{ article.name }}</h1>
+    <div class="card">
+        <span
+        v-for="(tag, index) in [...article.tags].sort((a, b) =>
+          a.localeCompare(b)
+        )"
+        :key="index"
+        class="tag"
+        style="margin-bottom: 0"
+        >{{ tag }}</span
+      >
+    <p>
+      <small>
+        {{ article.date }} <span class="primary">•</span>
+        {{ article.readTime }}min read</small
+      >
+      <br />
+      {{ article.description }}
+      </p>
+    </div>
+    <div v-html="md2html"></div>
+  </div>
 </template>
 
 <script>
@@ -7,10 +29,11 @@ import { marked } from "marked";
 import hljs from "highlight.js";
 export default {
   name: "ArcticleRederView",
-  props: ["article", "id"],
   data() {
     return {
       markdown: "<h1>works</h1><h1>works</h1><h1>works</h1>",
+      article: { name: "Something Went Wrong", date:"", readTime:"0",tags:[],description:""},
+      id: parseInt(this.$route.params.id),
     };
   },
   computed: {
@@ -28,6 +51,14 @@ export default {
       console.log(marked.parse(this.markdown));
       return marked.parse(this.markdown);
     },
+  },
+  mounted() {
+    let id = this.id;
+    let articles = require("@/assets/blogStorage.json").articles;
+    let currentArticle = articles.filter((e) => e.id === id)[0];
+    if (currentArticle) {
+      this.article = currentArticle;
+    }
   },
   /*
   mount() {
