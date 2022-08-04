@@ -14,28 +14,7 @@
     <div class="split">
       <div>
         <h2><span class="primary">new</span> Article()</h2>
-        <div class="card">
-          <h3 style="margin-bottom: 0.2em; margin-top: 0">{{ latest.name }}</h3>
-          <div style="margin: 0">
-            <span
-              v-for="tag in latest.tags"
-              :key="tag"
-              class="tag"
-              style="margin-bottom: 0"
-              >{{ tag }}</span
-            >
-          </div>
-          <p>
-            <small>
-              {{ latest.date }} <span class="primary">•</span>
-              {{ latest.readTime }}min read</small
-            >
-            <br />
-            {{ latest.description }}
-            <br />
-            <a href="">Read</a>
-          </p>
-        </div>
+        <ArticleCard :article="latest" />
 
         <button>View All</button>
       </div>
@@ -57,8 +36,12 @@
 </template>
 
 <script>
+import ArticleCard from "@/components/ArticleCard.vue";
 export default {
   name: "HomeView",
+  components: {
+    ArticleCard,
+  },
   data() {
     return {
       articles: require("@/assets/blogStorage.json"),
