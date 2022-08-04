@@ -1,5 +1,5 @@
 <template>
-  <footer class="container footer">
+  <footer class="footer">
     <div class="footerLinks">
       <a href="">Home</a>
       <a href="">Articles</a>
