@@ -1,5 +1,3 @@
-# XML Parsing for RSS Feeds in Scriptable
-
 I originally made a XML parser in scriptable for my [HTML Widget](https://github.com/Normal-Tangerine8609/Scriptable-HTML-Widget) project to replace the previous one. But if we find the right resource, XML parsing can be used for so much more!
 
 Scriptable widgets regularly rely on data from outside sources to be presented and what data comes in the form of XML and is readable available? If you guessed [RSS feeds](https://www.lifewire.com/what-is-an-rss-feed-4684568) you would be correct!
