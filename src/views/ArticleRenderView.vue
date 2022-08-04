@@ -2,7 +2,7 @@
   <div class="container">
     <h1>{{ article.name }}</h1>
     <div class="card">
-        <span
+      <span
         v-for="(tag, index) in [...article.tags].sort((a, b) =>
           a.localeCompare(b)
         )"
@@ -11,13 +11,13 @@
         style="margin-bottom: 0"
         >{{ tag }}</span
       >
-    <p>
-      <small>
-        {{ article.date }} <span class="primary">•</span>
-        {{ article.readTime }}min read</small
-      >
-      <br />
-      {{ article.description }}
+      <p>
+        <small>
+          {{ article.date }} <span class="primary">•</span>
+          {{ article.readTime }}min read</small
+        >
+        <br />
+        {{ article.description }}
       </p>
     </div>
     <div v-html="md2html"></div>
@@ -32,7 +32,13 @@ export default {
   data() {
     return {
       markdown: "<h1>works</h1><h1>works</h1><h1>works</h1>",
-      article: { name: "Something Went Wrong", date:"", readTime:"0",tags:[],description:""},
+      article: {
+        name: "Something Went Wrong",
+        date: "",
+        readTime: "0",
+        tags: [],
+        description: "",
+      },
       id: parseInt(this.$route.params.id),
     };
   },
@@ -45,30 +51,30 @@ export default {
           return hljs.highlight(code, { language }).value;
         },
         langPrefix: "hljs language-",
-        baseUrl: "",
+        baseUrl: "/articles/" + this.article.path + "/",
         headerPrefix: "",
       });
       console.log(marked.parse(this.markdown));
       return marked.parse(this.markdown);
     },
   },
-  mounted() {
+  async mounted() {
     let id = this.id;
     let articles = require("@/assets/blogStorage.json").articles;
     let currentArticle = articles.filter((e) => e.id === id)[0];
     if (currentArticle) {
       this.article = currentArticle;
     }
-  },
-  /*
-  mount() {
     try {
-      let response = await fetch("md.md");
+      let response = await fetch(
+        "/articles/" + this.article.path + "/markdown.md"
+      );
       let data = await response.text();
       this.markdown = data;
     } catch (e) {
-      this.markdown = "There was an error";
+      console.log(e);
+      this.markdown = "There was an error loading the markdown file.";
     }
-  },*/
+  },
 };
 </script>
