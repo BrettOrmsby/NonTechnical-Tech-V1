@@ -93,6 +93,7 @@ span.monospace {font-family: "Source Code Pro", monospace;}
   justify-content: space-around;
   align-items: flex-start;
   flex-wrap: wrap;
+  flex-direction: row;
 }
 .split > * {
   width: var(--split-width)

@@ -1,5 +1,46 @@
-{"articles":[
-    {
+{
+  "articles":[
+      {
+        "name": "Creating a XML Pareser in Scriptable",
+        "description":
+          "Go through the steps to make a XML parser in scriptable that can parse RSS feeds",
+        "date": "Augest 3, 2022",
+        "readTime": 19,
+        "path": "XML parser scriptable",
+        "tags": ["Scriptable", "Javascript", "Widget"],
+        "id": 1
+      },
+      {
+        "name": "Creating a XML Pareser in Scriptable",
+        "description":
+          "Go through the steps to make a XML parser in scriptable that can parse RSS feeds",
+        "date": "Augest 3, 2022",
+        "readTime": 19,
+        "path": "XML parser scriptable",
+        "tags": ["Scriptable", "Javascript", "Widget"],
+        "id": 1
+      },
+      {
+        "name": "Creating a XML Pareser in Scriptable",
+        "description":
+          "Go through the steps to make a XML parser in scriptable that can parse RSS feeds",
+        "date": "Augest 3, 2022",
+        "readTime": 19,
+        "path": "XML parser scriptable",
+        "tags": ["Scriptable", "Javascript", "Widget"],
+        "id": 1
+      },
+      {
+        "name": "Creating a XML Pareser in Scriptable",
+        "description":
+          "Go through the steps to make a XML parser in scriptable that can parse RSS feeds",
+        "date": "Augest 3, 2022",
+        "readTime": 19,
+        "path": "XML parser scriptable",
+        "tags": ["Scriptable", "Javascript", "Widget"],
+        "id": 1
+      },
+      {
         "name": "Creating a XML Pareser in Scriptable",
         "description":
           "Go through the steps to make a XML parser in scriptable that can parse RSS feeds",
@@ -9,4 +50,5 @@
         "tags": ["Scriptable", "Javascript", "Widget"],
         "id": 1
       }
-    ]}
+    ]
+}

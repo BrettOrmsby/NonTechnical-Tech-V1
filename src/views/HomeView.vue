@@ -16,7 +16,7 @@
         <h2><span class="primary">new</span> Article()</h2>
         <ArticleCard :article="latest" />
 
-        <button>View All</button>
+        <router-link to="articles"><button>View All</button></router-link>
       </div>
       <div>
         <h2><span class="primary">new</span> Project()</h2>

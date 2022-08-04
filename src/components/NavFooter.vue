@@ -1,8 +1,8 @@
 <template>
   <footer class="footer">
     <div class="footerLinks">
-      <a href="">Home</a>
-      <a href="">Articles</a>
+      <router-link to="/">Home</router-link>
+      <router-link to="/articles">Articles</router-link>
       <a href="">Projects</a>
       <a href="">Source</a>
     </div>
