@@ -90,17 +90,18 @@ span.monospace {font-family: "Source Code Pro", monospace;}
 
 .split {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: flex-start;
   flex-wrap: wrap;
   flex-direction: row;
 }
 .split > * {
-  width: var(--split-width)
+  width: var(--split-width);
+  margin: 1rem 0.5rem;
 }
 
 .container {
-  padding: var(--container-padding);;
+  padding: calc(var(--container-padding)/2) var(--container-padding) 0 var(--container-padding);;
   margin: auto;
 }
 
@@ -122,6 +123,7 @@ h2 {
 h1 {
   font-size: 2.5rem;
   margin-top:1rem;
+  text-align: center;
 }
 h1,
 h2,

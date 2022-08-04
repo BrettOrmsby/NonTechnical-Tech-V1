@@ -4,7 +4,7 @@
       <span class="primary">For</span> Article
       <span class="primary">Of</span> Articles
     </h1>
-    <div class="split">
+    <div class="split" style="margin: 0">
       <ArticleCard
         v-for="article in [...articles].reverse()"
         :key="article.id"
