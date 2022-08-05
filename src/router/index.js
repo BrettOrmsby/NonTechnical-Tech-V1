@@ -22,11 +22,27 @@ const routes = [
         /* webpackChunkName: "articles" */ "../views/ArticleRenderView.vue"
       ),
   },
+  {
+    path: "/404",
+    name: "notFound",
+    component: () =>
+      import(/* webpackChunkName: "not found" */ "../views/NotFoundView.vue"),
+  },
+  {
+    path: "/:pathMatch(.*)*",
+    beforeEnter() {
+      window.location = `/404`;
+    },
+  },
 ];
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
 });
+
+router.beforeEach(() => {
+  window.scrollTo(0, 0)
+})
 
 export default router;

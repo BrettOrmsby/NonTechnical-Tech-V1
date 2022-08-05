@@ -33,9 +33,9 @@ export default {
     return {
       markdown: "",
       article: {
-        name: "Something Went Wrong",
+        name: "",
         date: "",
-        readTime: "0",
+        readTime: "",
         tags: [],
         description: "",
       },
@@ -63,6 +63,8 @@ export default {
     let currentArticle = articles.filter((e) => e.id === id)[0];
     if (currentArticle) {
       this.article = currentArticle;
+    } else {
+      window.location = "/404";
     }
     try {
       let response = await fetch(
