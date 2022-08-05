@@ -1,4 +1,4 @@
-I originally made a XML parser in scriptable for my [HTML Widget](https://github.com/Normal-Tangerine8609/Scriptable-HTML-Widget) project to replace the previous one. But if we find the right resource, XML parsing can be used for so much more!
+I originally made a XML parser in Scriptable for my [HTML Widget](https://github.com/Normal-Tangerine8609/Scriptable-HTML-Widget) project to replace the previous one. But if we find the right resource, XML parsing can be used for so much more!
 
 Scriptable widgets regularly rely on data from outside sources to be presented and what data comes in the form of XML and is readable available? If you guessed [RSS feeds](https://www.lifewire.com/what-is-an-rss-feed-4684568) you would be correct!
 
@@ -342,6 +342,16 @@ When we loop through all the children of the node we will first have to call `tr
     }
   ...
 ```
+
+Now our function will run like the following diagram and will manipulate all children before climbing back up to the root element with the changes.
+
+![Recursion On DOM](https://miro.medium.com/max/1000/1*UGrzA4qtLCaaCiNAKZyj_w.gif)
+
+<center><small>
+
+Designed by [Anand K Parmar](https://medium.com/u/bafde9c53431?source=post_page-----d56328450846--------------------------------)
+
+</small></center>
 
 In the loop, we will follow by updating `newNode` with the value from the traversed children. If the child has no children we will set `newChild` to a string of it’s inner text.
 
