@@ -13,9 +13,14 @@
       <button style="padding: 0.5rem">
         <vue-feather type="code" stroke="var(--color)" size="1rem" />
       </button>
-      <a href="https://github.com/BrettOrmsby/blog"><button class="secondary" style="padding: 0.5rem">
-        <vue-feather type="github" stroke="var(--color)" size="1rem" />
-      </button></a>
+      <a href="https://github.com/BrettOrmsby/blog"
+        ><button class="secondary" style="padding: 0.5rem">
+          <vue-feather
+            type="github"
+            stroke="var(--color)"
+            size="1rem"
+          /></button
+      ></a>
     </div>
   </nav>
 </template>
@@ -24,17 +29,17 @@
 export default {
   name: "NavBar",
   created() {
-    let prevScrollpos = window.pageYOffset
-window.onscroll = function() {
-  let currentScrollPos = window.pageYOffset
-  if (prevScrollpos > currentScrollPos) {
-    document.getElementById("navbar").style.position = "fixed";
-  } else {
-    document.getElementById("navbar").style.position = "absolute";
-  }
-  prevScrollpos = currentScrollPos;
-}
-  }
+    let prevScrollpos = window.pageYOffset;
+    window.onscroll = function () {
+      let currentScrollPos = window.pageYOffset;
+      if (prevScrollpos > currentScrollPos) {
+        document.getElementById("navbar").style.position = "fixed";
+      } else {
+        document.getElementById("navbar").style.position = "absolute";
+      }
+      prevScrollpos = currentScrollPos;
+    };
+  },
 };
 </script>
 

@@ -32,35 +32,35 @@
 }
 
 @media only screen and (max-width: 600px) {
-  html {
+  :root {
     font-size: 16px;
     --container-padding: 1rem;
     --split-width: 100%;
   }
 }
 @media only screen and (min-width: 600px) {
-  html {
+  :root {
     font-size: 17px;
     --container-padding: 1.5rem;
     --split-width: 100%;
   }
 }
 @media only screen and (min-width: 768px) {
-  html {
+  :root {
     font-size: 18px;
     --container-padding: 2rem;
     --split-width: 45%;
   }
 }
 @media only screen and (min-width: 992px) {
-  html {
+  :root {
     font-size: 19px;
     --container-padding: 3rem;
     --split-width: 45%;
   }
 }
 @media only screen and (min-width: 1200px) {
-  html {
+  :root {
     font-size: 20px;
     --container-padding: 4rem;
     --split-width: 45%;
@@ -77,7 +77,6 @@
 
 html {
   font-family: "Source Sans Pro", sans-serif;
-  font-size: 16px;
   background-color: var(--bg);
   color: var(--color);
 }
@@ -197,6 +196,9 @@ blockquote {
   border-left: 0.5rem solid var(--border);
 }
 
+summary {cursor:pointer}
+description {cursor:pointer}
+
 img {
   width: 100%;
 }
@@ -271,6 +273,11 @@ hr {
   display:flex;
   justify-content:space-around;
   align-items:center;
+}
+
+.md {
+  max-width: 700px;
+  margin: 0 auto;
 }
 
 /*!

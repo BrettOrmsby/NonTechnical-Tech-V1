@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <h1>{{ article.name }}</h1>
-    <div class="card">
+    <div class="card" style="max-width: 700px; margin: 0 auto">
       <span
         v-for="(tag, index) in [...article.tags].sort((a, b) =>
           a.localeCompare(b)
@@ -20,7 +20,7 @@
         {{ article.description }}
       </p>
     </div>
-    <div v-html="md2html"></div>
+    <div v-html="md2html" class="md"></div>
   </div>
 </template>
 
@@ -31,7 +31,7 @@ export default {
   name: "ArcticleRederView",
   data() {
     return {
-      markdown: "<h1>works</h1><h1>works</h1><h1>works</h1>",
+      markdown: "",
       article: {
         name: "Something Went Wrong",
         date: "",
@@ -54,7 +54,6 @@ export default {
         baseUrl: "/articles/" + this.article.path + "/",
         headerPrefix: "",
       });
-      console.log(marked.parse(this.markdown));
       return marked.parse(this.markdown);
     },
   },
