@@ -16,7 +16,8 @@
     "vue": "^3.2.37",
     "vue-feather": "^2.0.0",
     "vue-feather-icon": "^1.2.0",
-    "vue-router": "^4.0.3"
+    "vue-router": "^4.0.3",
+    "vue-supabase": "^2.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",

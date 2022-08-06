@@ -1,26 +1,41 @@
 <template>
   <div class="container">
-    <h1>{{ article.name }}</h1>
-    <div class="card" style="max-width: 700px; margin: 0 auto">
-      <span
-        v-for="(tag, index) in [...article.tags].sort((a, b) =>
-          a.localeCompare(b)
-        )"
-        :key="index"
-        class="tag"
-        style="margin-bottom: 0"
-        >{{ tag }}</span
+    <template v-if="loading">
+      <div
+        style="
+          display: flex;
+          align-content: center;
+          justify-content: center;
+          height: 100%;
+        "
       >
-      <p>
-        <small>
-          {{ article.date }} <span class="primary">•</span>
-          {{ article.readTime }}min read</small
+        <vue-feather type="loader" animation="spin" stroke="var(--primary)" />
+      </div>
+    </template>
+    <h1 v-else-if="error">There Was an Error</h1>
+    <template v-else>
+      <h1>{{ article.name }}</h1>
+      <div class="card" style="max-width: 700px; margin: 0 auto">
+        <span
+          v-for="(tag, index) in [...article.tags].sort((a, b) =>
+            a.localeCompare(b)
+          )"
+          :key="index"
+          class="tag"
+          style="margin-bottom: 0"
+          >{{ tag }}</span
         >
-        <br />
-        {{ article.description }}
-      </p>
-    </div>
-    <div v-html="md2html" class="md"></div>
+        <p>
+          <small>
+            {{ article.date }} <span class="primary">•</span>
+            {{ article.readTime }}min read</small
+          >
+          <br />
+          {{ article.description }}
+        </p>
+      </div>
+      <div v-html="md2html" class="md"></div>
+    </template>
   </div>
 </template>
 
@@ -31,6 +46,8 @@ export default {
   name: "ArcticleRederView",
   data() {
     return {
+      loading: true,
+      error: false,
       markdown: "",
       article: {
         name: "",
@@ -58,24 +75,42 @@ export default {
     },
   },
   async mounted() {
+    console.log("start");
     let id = this.id;
-    let articles = require("@/assets/blogStorage.json").articles;
+    let data = await this.$supabase.storage
+      .from("articles")
+      .download("blogStorage.json");
+    if (data.error !== null) {
+      console.log(data.error);
+      this.loading = false;
+      this.error = true;
+      return;
+    }
+    let articles = JSON.parse(await data.data.text()).articles;
     let currentArticle = articles.filter((e) => e.id === id)[0];
     if (currentArticle) {
       this.article = currentArticle;
     } else {
       window.location = "/404";
+      return;
     }
-    try {
-      let response = await fetch(
-        "/articles/" + this.article.path + "/markdown.md"
-      );
-      let data = await response.text();
-      this.markdown = data;
-    } catch (e) {
-      console.log(e);
-      this.markdown = "There was an error loading the markdown file.";
+    data = await this.$supabase.storage
+      .from("articles")
+      .download("markdown/" + currentArticle.path + ".md");
+    if (data.error !== null) {
+      console.log(data.error);
+      this.loading = false;
+      this.error = true;
+      return;
     }
+    this.loading = false;
+    this.markdown = await data.data.text();
   },
 };
 </script>
+
+<style>
+svg {
+  margin: 0 auto;
+}
+</style>
