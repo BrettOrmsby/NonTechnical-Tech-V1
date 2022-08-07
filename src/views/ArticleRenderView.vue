@@ -1,6 +1,6 @@
 <template>
   <template v-if="loading">
-    <vue-feather type="loader" animation="spin" stroke="var(--primary)" />
+    <SpinLoader />
   </template>
   <h1 v-else-if="error">There Was an Error</h1>
   <template v-else>
@@ -31,8 +31,12 @@
 <script>
 import { marked } from "marked";
 import hljs from "highlight.js";
+import SpinLoader from "@/components/SpinLoader.vue";
 export default {
   name: "ArcticleRederView",
+  components: {
+    SpinLoader,
+  },
   data() {
     return {
       loading: true,
@@ -64,7 +68,6 @@ export default {
     },
   },
   async mounted() {
-    console.log("start");
     let id = this.id;
     let data = await this.$supabase.storage
       .from("articles")

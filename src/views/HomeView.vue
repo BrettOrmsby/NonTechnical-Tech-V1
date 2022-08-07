@@ -13,8 +13,9 @@
   <div class="split">
     <div>
       <h2><span class="primary">new</span> Article()</h2>
-      <ArticleCard :article="latest" />
-
+      <SpinLoader v-if="loadingArticle" />
+      <h3 v-else-if="errorArticle">There Was An Error</h3>
+      <ArticleCard v-else :article="latest" />
       <router-link to="articles"><button>View All</button></router-link>
     </div>
     <div>
@@ -34,21 +35,47 @@
 </template>
 
 <script>
+import SpinLoader from "@/components/SpinLoader.vue";
 import ArticleCard from "@/components/ArticleCard.vue";
 export default {
   name: "HomeView",
   components: {
+    SpinLoader,
     ArticleCard,
   },
   data() {
     return {
-      articles: require("@/assets/blogStorage.json"),
+      loadingArticle: true,
+      errorArticle: false,
+      articles: [
+        {
+          name: "",
+          date: "",
+          readTime: "",
+          tags: [],
+          description: "",
+        },
+      ],
     };
   },
   computed: {
     latest() {
-      return this.articles.articles[this.articles.articles.length - 1];
+      return this.articles[this.articles.length - 1];
     },
+  },
+  async mounted() {
+    let data = await this.$supabase.storage
+      .from("articles")
+      .download("blogStorage.json");
+    if (data.error !== null) {
+      console.log(data.error);
+      this.loadingArticle = false;
+      this.errorArticle = true;
+      return;
+    }
+    let articles = JSON.parse(await data.data.text()).articles;
+    this.articles = articles;
+    this.loadingArticle = false;
   },
 };
 </script>
