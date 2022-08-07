@@ -280,6 +280,12 @@ hr {
   margin: 0 auto;
 }
 
+.vue-feather--loader {
+  position:absolute;
+  left: calc(50% - 0.5rem);
+  top: calc(50% - 0.5rem);;
+}
+
 /*!
   Theme: GitHub Dark
   Description: Dark theme as seen on github.com

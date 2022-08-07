@@ -1,42 +1,31 @@
 <template>
-  <div class="container">
-    <template v-if="loading">
-      <div
-        style="
-          display: flex;
-          align-content: center;
-          justify-content: center;
-          height: 100%;
-        "
+  <template v-if="loading">
+    <vue-feather type="loader" animation="spin" stroke="var(--primary)" />
+  </template>
+  <h1 v-else-if="error">There Was an Error</h1>
+  <template v-else>
+    <h1>{{ article.name }}</h1>
+    <div class="card" style="max-width: 700px; margin: 0 auto">
+      <span
+        v-for="(tag, index) in [...article.tags].sort((a, b) =>
+          a.localeCompare(b)
+        )"
+        :key="index"
+        class="tag"
+        style="margin-bottom: 0"
+        >{{ tag }}</span
       >
-        <vue-feather type="loader" animation="spin" stroke="var(--primary)" />
-      </div>
-    </template>
-    <h1 v-else-if="error">There Was an Error</h1>
-    <template v-else>
-      <h1>{{ article.name }}</h1>
-      <div class="card" style="max-width: 700px; margin: 0 auto">
-        <span
-          v-for="(tag, index) in [...article.tags].sort((a, b) =>
-            a.localeCompare(b)
-          )"
-          :key="index"
-          class="tag"
-          style="margin-bottom: 0"
-          >{{ tag }}</span
+      <p>
+        <small>
+          {{ article.date }} <span class="primary">•</span>
+          {{ article.readTime }}min read</small
         >
-        <p>
-          <small>
-            {{ article.date }} <span class="primary">•</span>
-            {{ article.readTime }}min read</small
-          >
-          <br />
-          {{ article.description }}
-        </p>
-      </div>
-      <div v-html="md2html" class="md"></div>
-    </template>
-  </div>
+        <br />
+        {{ article.description }}
+      </p>
+    </div>
+    <div v-html="md2html" class="md"></div>
+  </template>
 </template>
 
 <script>
