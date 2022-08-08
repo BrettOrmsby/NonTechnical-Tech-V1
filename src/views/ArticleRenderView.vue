@@ -61,7 +61,8 @@ export default {
           return hljs.highlight(code, { language }).value;
         },
         langPrefix: "hljs language-",
-        baseUrl: "/articles/" + this.article.path + "/",
+        baseUrl:
+          "https://wfrgrcqleolejyoojiwj.supabase.co/storage/v1/object/public/images/",
         headerPrefix: "",
       });
       return marked.parse(this.markdown);
