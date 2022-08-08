@@ -6,7 +6,7 @@
   </h1>
   <p class="card">
     Hi, I'm Brett Ormsby and I write a non-technical blog about solving problem
-    in ways that come to my mind and are not as optimized or techical as others.
+    in ways that come to my mind and are not as optimized or technical as others.
     My current Interests are Scriptable, Vue.js and JavaScript.
   </p>
 
@@ -23,7 +23,7 @@
       <SpinLoader v-if="loadingProject" />
       <h3 v-else-if="errorProject">There Was An Error</h3>
       <ProjectCard v-else :project="latestProject" />
-      <button>View All</button>
+      <router-link to="projects"><button>View All</button></router-link>
     </div>
   </div>
 </template>
@@ -73,30 +73,36 @@ export default {
       return this.projects[this.projects.length - 1];
     },
   },
-  async mounted() {
-    let articleData = await this.$supabase.storage
-      .from("articles")
-      .download("blogStorage.json");
-    if (articleData.error !== null) {
-      console.log(articleData.error);
-      this.loadingArticle = false;
-      this.errorArticle = true;
-    } else {
-      let articles = JSON.parse(await articleData.data.text()).articles;
-      this.articles = articles;
-      this.loadingArticle = false;
+  mounted() {
+    loadArticle.bind(this)();
+    loadProject.bind(this)();
+    async function loadArticle() {
+      let articleData = await this.$supabase.storage
+        .from("articles")
+        .download("blogStorage.json");
+      if (articleData.error !== null) {
+        console.log(articleData.error);
+        this.loadingArticle = false;
+        this.errorArticle = true;
+      } else {
+        let articles = JSON.parse(await articleData.data.text()).articles;
+        this.articles = articles;
+        this.loadingArticle = false;
+      }
     }
-    let projectData = await this.$supabase.storage
-      .from("articles")
-      .download("projectStorage.json");
-    if (projectData.error !== null) {
-      console.log(projectData.error);
-      this.loadingProject = false;
-      this.errorProject = true;
-    } else {
-      let projects = JSON.parse(await projectData.data.text()).projects;
-      this.projects = projects;
-      this.loadingProject = false;
+    async function loadProject() {
+      let projectData = await this.$supabase.storage
+        .from("articles")
+        .download("projectStorage.json");
+      if (projectData.error !== null) {
+        console.log(projectData.error);
+        this.loadingProject = false;
+        this.errorProject = true;
+      } else {
+        let projects = JSON.parse(await projectData.data.text()).projects;
+        this.projects = projects;
+        this.loadingProject = false;
+      }
     }
   },
 };

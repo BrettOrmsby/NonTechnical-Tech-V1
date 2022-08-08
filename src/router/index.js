@@ -14,12 +14,18 @@ const routes = [
       import(/* webpackChunkName: "articles" */ "../views/ArticlesView.vue"),
   },
   {
+    path: "/projects",
+    name: "projects",
+    component: () =>
+      import(/* webpackChunkName: "projects" */ "../views/ProjectsView.vue"),
+  },
+  {
     path: "/articles/:id",
     name: "article",
     props: true,
     component: () =>
       import(
-        /* webpackChunkName: "articles" */ "../views/ArticleRenderView.vue"
+        /* webpackChunkName: "article" */ "../views/ArticleRenderView.vue"
       ),
   },
   {
