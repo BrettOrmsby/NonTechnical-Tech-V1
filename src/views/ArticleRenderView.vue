@@ -100,9 +100,3 @@ export default {
   },
 };
 </script>
-
-<style>
-svg {
-  margin: 0 auto;
-}
-</style>

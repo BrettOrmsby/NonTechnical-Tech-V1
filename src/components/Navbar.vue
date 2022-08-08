@@ -44,7 +44,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .button-container {
   margin: 0;
   padding: 0;

@@ -108,7 +108,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .vue-feather--loader {
   position: relative;
 }

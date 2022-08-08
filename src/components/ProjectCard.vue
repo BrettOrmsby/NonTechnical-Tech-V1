@@ -28,7 +28,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 img {
   display: block;
   margin: 0 auto;
