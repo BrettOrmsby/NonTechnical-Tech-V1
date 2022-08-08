@@ -3,7 +3,7 @@
     <div class="footerLinks">
       <router-link to="/">Home</router-link>
       <router-link to="/articles">Articles</router-link>
-      <a href="">Projects</a>
+      <router-link to="/projects">Projects</router-link>
       <a href="https://github.com/BrettOrmsby/blog">Source</a>
     </div>
     <small style="display: block; text-align: center"

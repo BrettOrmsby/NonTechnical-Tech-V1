@@ -10,9 +10,10 @@
         ><button style="padding: 0.5rem">
           <vue-feather type="book" stroke="var(--color)" size="1rem" /></button
       ></router-link>
-      <button style="padding: 0.5rem">
-        <vue-feather type="code" stroke="var(--color)" size="1rem" />
-      </button>
+      <router-link to="/projects"
+        ><button style="padding: 0.5rem">
+          <vue-feather type="code" stroke="var(--color)" size="1rem" /></button
+      ></router-link>
       <a href="https://github.com/BrettOrmsby/blog"
         ><button class="secondary" style="padding: 0.5rem">
           <vue-feather

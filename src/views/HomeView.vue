@@ -6,8 +6,8 @@
   </h1>
   <p class="card">
     Hi, I'm Brett Ormsby and I write a non-technical blog about solving problem
-    in ways that come to my mind and are not as optimized or technical as others.
-    My current Interests are Scriptable, Vue.js and JavaScript.
+    in ways that come to my mind and are not as optimized or technical as
+    others. My current Interests are Scriptable, Vue.js and JavaScript.
   </p>
 
   <div class="split">
