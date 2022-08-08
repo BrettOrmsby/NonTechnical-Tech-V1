@@ -1,5 +1,15 @@
 <template>
-  <SpinLoader />
+  <h1>Search</h1>
+  <input type="text" v-model="query.title" />
+  <SpinLoader v-if="loading" />
+  <h2 v-else-if="error">There Was An Error</h2>
+  <h2 v-else-if="filter.length === 0">No Items Were Found</h2>
+  <div v-else class="split">
+    <template v-for="(item, index) in filter" :key="index">
+      <ArticleCard v-if="item.date" :article="item" />
+      <ProjectCard v-else :project="item" />
+    </template>
+  </div>
 </template>
 
 <script>
@@ -24,7 +34,7 @@ export default {
       query: {
         tag: [],
         title: "",
-        type: null,
+        type: "all",
       },
     };
   },
@@ -32,17 +42,34 @@ export default {
     loading() {
       return this.loadingArticle && this.loadingProject;
     },
+    filter() {
+      return [...this.articles, ...this.projects].filter((e) => {
+        if (!e.name.toLowerCase().includes(this.query.title.toLowerCase())) {
+          return false;
+        }
+        if (this.query.type === "article" && !e.date) {
+          return false;
+        }
+        if (this.query.type === "project" && !e.link) {
+          return false;
+        }
+        for (let tag of this.query.tag) {
+          if (!e.tags.includes(tag)) {
+            return false;
+          }
+        }
+        return true;
+      });
+    },
   },
   mounted() {
     let queryParams = this.$route.query;
-    console.log(queryParams);
     let { title, tag, type } = queryParams;
     let query = {
-      tag: tag.split(",") || [],
+      tag: tag?.split(",") || [],
       title: title || "",
-      type: type || null,
+      type: type || "all",
     };
-    console.log(query);
     this.query = query;
     loadArticle.bind(this)();
     loadProject.bind(this)();
@@ -74,6 +101,14 @@ export default {
         this.loadingProject = false;
       }
     }
+  },
+  watch: {
+    query: {
+      handler(newer, older) {
+        this.$router.replace({ name: "search", query: newer });
+      },
+      deep: true,
+    },
   },
 };
 </script>
