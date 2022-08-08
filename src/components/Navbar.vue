@@ -6,6 +6,14 @@
       ></router-link
     >
     <div class="button-container">
+      <router-link to="/search"
+        ><button style="padding: 0.5rem">
+          <vue-feather
+            type="search"
+            stroke="var(--color)"
+            size="1rem"
+          /></button
+      ></router-link>
       <router-link to="/articles"
         ><button style="padding: 0.5rem">
           <vue-feather type="book" stroke="var(--color)" size="1rem" /></button
