@@ -1,6 +1,35 @@
 <template>
   <h1>Search</h1>
   <input type="text" v-model="query.title" />
+  <input id="all" type="radio" name="type" value="all" v-model="query.type" />
+  <label for="all">All</label>
+  <input
+    id="article"
+    type="radio"
+    name="type"
+    value="article"
+    v-model="query.type"
+  />
+  <label for="article">Article</label>
+  <input
+    id="project"
+    type="radio"
+    name="type"
+    value="project"
+    v-model="query.type"
+  />
+  <label for="project">Project</label>
+
+  <template v-for="(tag, index) in allTags" :key="index">
+    <input
+      :id="tag"
+      type="checkbox"
+      :value="tag"
+      name="tag"
+      v-model="queryTags"
+    />
+    <label :for="tag">{{ tag }}</label>
+  </template>
   <SpinLoader v-if="loading" />
   <h2 v-else-if="error">There Was An Error</h2>
   <h2 v-else-if="filter.length === 0">No Items Were Found</h2>
@@ -26,13 +55,14 @@ export default {
   },
   data() {
     return {
+      queryTags: [],
       loadingArticle: true,
       loadingProject: true,
       error: false,
       articles: [],
       projects: [],
       query: {
-        tag: [],
+        tag: "",
         title: "",
         type: "all",
       },
@@ -41,6 +71,13 @@ export default {
   computed: {
     loading() {
       return this.loadingArticle && this.loadingProject;
+    },
+    allTags() {
+      let output = [];
+      for (let item of [...this.articles, ...this.projects]) {
+        output = [...new Set([...output, ...item.tags])];
+      }
+      return output;
     },
     filter() {
       return [...this.articles, ...this.projects].filter((e) => {
@@ -53,7 +90,7 @@ export default {
         if (this.query.type === "project" && !e.link) {
           return false;
         }
-        for (let tag of this.query.tag) {
+        for (let tag of this.query.tag.split(",").filter((e) => e)) {
           if (!e.tags.includes(tag)) {
             return false;
           }
@@ -66,10 +103,11 @@ export default {
     let queryParams = this.$route.query;
     let { title, tag, type } = queryParams;
     let query = {
-      tag: tag?.split(",") || [],
+      tag: tag?.split(",") || "",
       title: title || "",
       type: type || "all",
     };
+    this.queryTags = tag?.split(",") || [];
     this.query = query;
     loadArticle.bind(this)();
     loadProject.bind(this)();
@@ -104,11 +142,20 @@ export default {
   },
   watch: {
     query: {
-      handler(newer, older) {
+      handler(newer) {
         this.$router.replace({ name: "search", query: newer });
       },
       deep: true,
     },
+    queryTags(newer) {
+      this.query.tag = newer.length === 0 ? "" : newer.join(",");
+    },
   },
 };
 </script>
+
+<style scoped>
+h2 {
+  text-align: center;
+}
+</style>
