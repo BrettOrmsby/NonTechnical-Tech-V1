@@ -11,7 +11,6 @@
   --border: #575757;
   --layer: #2f2f2f;
   --code: #2f2f2f;
-  --shadow: rgba(255, 255, 255, 0.1);
 }
 
 @media (prefers-color-scheme: light) {
@@ -27,7 +26,6 @@
     --border: #e0e0e0;
     --layer: #eeeeee;
     --code: #2f2f2f;
-    --shadow: rgba(0, 0, 0, 0.2);
   }
 }
 

@@ -1,35 +1,47 @@
 <template>
   <h1>Search</h1>
-  <input type="text" v-model="query.title" />
-  <input id="all" type="radio" name="type" value="all" v-model="query.type" />
-  <label for="all">All</label>
-  <input
-    id="article"
-    type="radio"
-    name="type"
-    value="article"
-    v-model="query.type"
-  />
-  <label for="article">Article</label>
-  <input
-    id="project"
-    type="radio"
-    name="type"
-    value="project"
-    v-model="query.type"
-  />
-  <label for="project">Project</label>
+  <div class="card">
+    <input type="text" v-model="query.title" placeholder="Search Title" />
+    <label class="flex" for="all"
+      ><input
+        id="all"
+        type="radio"
+        name="type"
+        value="all"
+        v-model="query.type"
+      />All</label
+    >
+    <label class="flex" for="article"
+      ><input
+        id="article"
+        type="radio"
+        name="type"
+        value="article"
+        v-model="query.type"
+      />Article</label
+    >
+    <label class="flex" for="project"
+      ><input
+        id="project"
+        type="radio"
+        name="type"
+        value="project"
+        v-model="query.type"
+      />Project</label
+    >
 
-  <template v-for="(tag, index) in allTags" :key="index">
-    <input
-      :id="tag"
-      type="checkbox"
-      :value="tag"
-      name="tag"
-      v-model="queryTags"
-    />
-    <label :for="tag">{{ tag }}</label>
-  </template>
+    <template v-for="(tag, index) in allTags" :key="index">
+      <label class="flex" :for="tag"
+        ><input
+          :id="tag"
+          type="checkbox"
+          :value="tag"
+          name="tag"
+          v-model="queryTags"
+        />{{ tag }}</label
+      >
+    </template>
+  </div>
   <SpinLoader v-if="loading" />
   <h2 v-else-if="error">There Was An Error</h2>
   <h2 v-else-if="filter.length === 0">No Items Were Found</h2>
@@ -77,7 +89,7 @@ export default {
       for (let item of [...this.articles, ...this.projects]) {
         output = [...new Set([...output, ...item.tags])];
       }
-      return output;
+      return output.sort((a, b) => a.localeCompare(b));
     },
     filter() {
       return [...this.articles, ...this.projects].filter((e) => {
@@ -148,7 +160,10 @@ export default {
       deep: true,
     },
     queryTags(newer) {
-      this.query.tag = newer.length === 0 ? "" : newer.join(",");
+      this.query.tag =
+        newer.filter((e) => e).length === 0
+          ? ""
+          : newer.filter((e) => e).join(",");
     },
   },
 };
@@ -157,5 +172,62 @@ export default {
 <style scoped>
 h2 {
   text-align: center;
+}
+label {
+  cursor: pointer;
+}
+input[type="text"] {
+  cursor: pointer;
+  width: 50%;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  border: 0.1rem solid var(--border);
+  background-color: var(--bg);
+  color: var(--color);
+  font-family: inherit;
+  font-size: inherit;
+  display: block;
+  margin: 0 auto;
+}
+input[type="text"]:focus {
+  border-color: var(--primary);
+  outline: none;
+}
+.flex {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin: 0;
+}
+input[type="radio"] {
+  cursor: pointer;
+  appearance: none;
+  background-color: transparent;
+  background-clip: content-box;
+  padding: 0.1rem;
+  margin: 0;
+  margin-right: 0.25rem;
+  width: 0.75rem;
+  height: 0.75rem;
+  border: 0.1rem solid var(--primary);
+  border-radius: 50%;
+}
+input[type="radio"]:checked {
+  background-color: var(--primary);
+}
+
+input[type="checkbox"] {
+  appearance: none;
+  background-color: transparent;
+  margin: 0;
+  margin-right: 0.25rem;
+  width: 0.75rem;
+  height: 0.75rem;
+  border: 0.1rem solid var(--primary);
+  border-radius: 0.1rem;
+}
+input[type="checkbox"]:checked {
+  clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+  background-color: var(--primary);
 }
 </style>
