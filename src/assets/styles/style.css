@@ -232,6 +232,7 @@ hr {
 }
 
 .tag {
+  cursor:pointer;
   font-size: 0.8rem;
   padding: 0.5rem;
   display: inline-block;
@@ -239,8 +240,7 @@ hr {
   border: 0.1rem solid var(--primary);
   color: var(--primary);
   background-color: transparent;
-  margin-left: 0.5em;
-  margin-right: 0.5rem;
+   margin: 0.5rem;
 }
 .tag:hover {
   color: var(--bg);

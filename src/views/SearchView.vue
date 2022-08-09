@@ -1,44 +1,45 @@
 <template>
   <h1>Search</h1>
   <div class="card">
-    <input type="text" v-model="query.title" placeholder="Search Title" />
-    <label class="flex" for="all"
-      ><input
-        id="all"
-        type="radio"
-        name="type"
-        value="all"
-        v-model="query.type"
-      />All</label
-    >
-    <label class="flex" for="article"
-      ><input
-        id="article"
-        type="radio"
-        name="type"
-        value="article"
-        v-model="query.type"
-      />Article</label
-    >
-    <label class="flex" for="project"
-      ><input
-        id="project"
-        type="radio"
-        name="type"
-        value="project"
-        v-model="query.type"
-      />Project</label
-    >
-
+    <div class="split" style="margin-bottom: 0; align-items: center">
+      <input type="text" v-model="query.title" placeholder="Search Title" />
+      <div>
+        <b>Show</b>
+        <label class="flex" for="all"
+          ><input
+            id="all"
+            type="radio"
+            name="type"
+            value="all"
+            v-model="query.type"
+          />All</label
+        >
+        <label class="flex" for="article"
+          ><input
+            id="article"
+            type="radio"
+            name="type"
+            value="article"
+            v-model="query.type"
+          />Articles</label
+        >
+        <label class="flex" for="project"
+          ><input
+            id="project"
+            type="radio"
+            name="type"
+            value="project"
+            v-model="query.type"
+          />Projects</label
+        >
+      </div>
+    </div>
     <template v-for="(tag, index) in allTags" :key="index">
-      <label class="flex" :for="tag"
-        ><input
-          :id="tag"
-          type="checkbox"
-          :value="tag"
-          name="tag"
-          v-model="queryTags"
-        />{{ tag }}</label
+      <span
+        class="tag noHover"
+        :class="{ click: queryTags.includes(tag) }"
+        @click="tagClick"
+        >{{ tag }}</span
       >
     </template>
   </div>
@@ -152,6 +153,18 @@ export default {
       }
     }
   },
+  methods: {
+    tagClick(event) {
+      let element = event.target;
+      if (this.queryTags.includes(element.innerText)) {
+        this.queryTags = this.queryTags.filter(
+          (item) => item !== element.innerText
+        );
+      } else {
+        this.queryTags = [...this.queryTags, element.innerText];
+      }
+    },
+  },
   watch: {
     query: {
       handler(newer) {
@@ -215,19 +228,12 @@ input[type="radio"] {
 input[type="radio"]:checked {
   background-color: var(--primary);
 }
-
-input[type="checkbox"] {
-  appearance: none;
+.noHover {
+  color: var(--primary);
   background-color: transparent;
-  margin: 0;
-  margin-right: 0.25rem;
-  width: 0.75rem;
-  height: 0.75rem;
-  border: 0.1rem solid var(--primary);
-  border-radius: 0.1rem;
 }
-input[type="checkbox"]:checked {
-  clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+.click {
+  color: var(--bg);
   background-color: var(--primary);
 }
 </style>
