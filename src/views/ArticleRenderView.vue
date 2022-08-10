@@ -101,3 +101,11 @@ export default {
   },
 };
 </script>
+
+<style>
+.vue-feather--loader {
+  position: absolute;
+  left: calc(50% - 0.5rem);
+  top: calc(50% - 0.5rem);
+}
+</style>
