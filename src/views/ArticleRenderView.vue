@@ -83,6 +83,7 @@ export default {
     let currentArticle = articles.filter((e) => e.id === id)[0];
     if (currentArticle) {
       this.article = currentArticle;
+      document.title = currentArticle.name + " | NonTechnical Tech";
     } else {
       window.location = "/404";
       return;
@@ -101,11 +102,3 @@ export default {
   },
 };
 </script>
-
-<style>
-.vue-feather--loader {
-  position: absolute;
-  left: calc(50% - 0.5rem);
-  top: calc(50% - 0.5rem);
-}
-</style>

@@ -7,7 +7,7 @@
       <router-link to="/projects">Projects</router-link>
       <a href="https://github.com/BrettOrmsby/blog">Source</a>
     </div>
-    <small style="display: block; text-align: center"
+    <small style="display: block; text-align: center; margin: 0"
       ><span class="primary">Non</span>Technical Tech 2022 ©</small
     >
   </footer>

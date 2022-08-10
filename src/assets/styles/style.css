@@ -77,6 +77,17 @@ html {
   font-family: "Source Sans Pro", sans-serif;
   background-color: var(--bg);
   color: var(--color);
+  margin:0;
+}
+body {
+  margin: 0;
+}
+
+#app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 p, blockquote {word-break: break-word;}
@@ -100,7 +111,6 @@ span.monospace {font-family: "Source Code Pro", monospace;}
 .container {
   padding: var(--container-padding) var(--container-padding) 0 var(--container-padding);;
   margin: auto;
-  min-height: 80vh;
 }
 
 h6 {
@@ -261,11 +271,13 @@ hr {
 }
 .footer {
   background-color: var(--layer);
-  padding: 1em;
+  padding: 1rem;
   width:100%;
   border-top: 0.05rem solid var(--border);
-  position:relative;
-  top:1rem;
+  margin-bottom:0;
+  margin-top: 0;
+  top: 1rem;
+  position: relative;
 }
 .footerLinks {
   display:flex;
@@ -276,12 +288,6 @@ hr {
 .md {
   max-width: 700px;
   margin: 0 auto;
-}
-
-.vue-feather--loader {
-  position:absolute;
-  left: calc(50% - 0.5rem);
-  top: calc(50% - 0.5rem);;
 }
 
 /*!

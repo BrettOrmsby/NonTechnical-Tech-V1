@@ -237,10 +237,3 @@ input[type="radio"]:checked {
   background-color: var(--primary);
 }
 </style>
-<style>
-.vue-feather--loader {
-  top: 70vh;
-  position: absolute;
-  left: calc(50% - 0.5rem);
-}
-</style>

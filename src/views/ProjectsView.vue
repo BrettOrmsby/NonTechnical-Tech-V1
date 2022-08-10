@@ -54,17 +54,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-.card {
-  margin-top: 0px;
-}
-</style>
-
-<style>
-.vue-feather--loader {
-  position: absolute;
-  left: calc(50% - 0.5rem);
-  top: calc(50% - 0.5rem);
-}
-</style>
