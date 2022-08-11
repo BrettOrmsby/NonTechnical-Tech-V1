@@ -55,7 +55,6 @@
 </template>
 
 <script>
-// query shjould be the router or default . search button will update the wuery
 import SpinLoader from "@/components/SpinLoader.vue";
 import ArticleCard from "@/components/ArticleCard.vue";
 import ProjectCard from "@/components/ProjectCard.vue";

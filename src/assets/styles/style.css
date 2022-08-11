@@ -110,7 +110,7 @@ span.monospace {font-family: "Source Code Pro", monospace;}
 
 .container {
   padding: var(--container-padding) var(--container-padding) 0 var(--container-padding);;
-  margin: auto;
+  margin: auto 0;
 }
 
 h6 {
