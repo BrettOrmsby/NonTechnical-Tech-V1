@@ -1,5 +1,6 @@
 <template>
   <template v-if="loading">
+    <div class="spacer"></div>
     <SpinLoader />
   </template>
   <h1 v-else-if="error">There Was an Error</h1>
@@ -108,5 +109,8 @@ export default {
 .md {
   max-width: 700px;
   margin: 0 auto;
+}
+.spacer {
+  margin-top: 3rem;
 }
 </style>
