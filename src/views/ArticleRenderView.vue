@@ -102,3 +102,11 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+@import "@/assets/styles/highlight.css";
+.md {
+  max-width: 700px;
+  margin: 0 auto;
+}
+</style>

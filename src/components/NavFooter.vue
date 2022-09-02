@@ -7,9 +7,7 @@
       <router-link to="/projects">Projects</router-link>
       <a href="https://github.com/BrettOrmsby/blog">Source</a>
     </div>
-    <small style="display: block; text-align: center; margin: 0"
-      ><span class="primary">Non</span>Technical Tech 2022 ©</small
-    >
+    <small><span class="primary">Non</span>Technical Tech 2022 ©</small>
   </footer>
 </template>
 
@@ -18,3 +16,27 @@ export default {
   name: "NavFooter",
 };
 </script>
+
+<style scoped>
+.footer {
+  background-color: var(--layer);
+  padding: 1rem;
+  width: 100%;
+  border-top: 0.05rem solid var(--border);
+  margin-bottom: 0;
+  margin-top: 0;
+  top: 1rem;
+  position: relative;
+}
+.footerLinks {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-bottom: var(--margin);
+}
+small {
+  display: block;
+  text-align: center;
+  margin: 0;
+}
+</style>

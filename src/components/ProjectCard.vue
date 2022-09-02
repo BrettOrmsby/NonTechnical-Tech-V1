@@ -1,7 +1,7 @@
 <template>
   <div class="card">
-    <h3 style="margin-bottom: 0.2em; margin-top: 0">{{ project.name }}</h3>
-    <div style="margin: 0">
+    <h3>{{ project.name }}</h3>
+    <div>
       <TagList :tags="project.tags" />
     </div>
     <img :src="project.image" />

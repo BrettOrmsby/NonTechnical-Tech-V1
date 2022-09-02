@@ -1,7 +1,7 @@
 <template>
   <div class="card">
-    <h3 style="margin-bottom: 0.2em; margin-top: 0">{{ article.name }}</h3>
-    <div style="margin: 0">
+    <h3>{{ article.name }}</h3>
+    <div class="tags">
       <TagList :tags="article.tags" />
     </div>
     <p>
