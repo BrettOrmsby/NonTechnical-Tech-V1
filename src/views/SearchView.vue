@@ -1,7 +1,7 @@
 <template>
   <h1>Search</h1>
   <div class="card">
-    <div class="split" style="margin-bottom: 0; align-items: center">
+    <div class="split">
       <input type="text" v-model="query.title" placeholder="Search Title" />
       <div>
         <b>Show</b>

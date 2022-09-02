@@ -5,7 +5,7 @@
   </h1>
   <SpinLoader v-if="loading" />
   <h2 v-else-if="error">There Was An Error</h2>
-  <div v-else class="split" style="margin: 0">
+  <div v-else class="split">
     <ArticleCard
       v-for="article in [...articles].reverse()"
       :key="article.id"
