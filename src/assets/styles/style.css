@@ -68,6 +68,9 @@ html {
   background-color: var(--bg);
   color: var(--color);
 }
+body {
+  margin: 0;
+}
 
 #app {
   min-height: 100vh;

@@ -23,10 +23,6 @@ export default {
   padding: 1rem;
   width: 100%;
   border-top: 0.05rem solid var(--border);
-  margin-bottom: 0;
-  margin-top: 0;
-  top: 1rem;
-  position: relative;
 }
 .footerLinks {
   display: flex;
