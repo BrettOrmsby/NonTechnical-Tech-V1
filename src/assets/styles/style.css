@@ -189,7 +189,6 @@ pre > code {
   margin: 0;
   word-break: normal;
   white-space: pre;
-  font-size: var(--small);
 }
 
 blockquote {
@@ -218,10 +217,6 @@ th,
 td {
   padding: 0.5rem 1.3rem;
   border: 1px solid var(--border);
-}
-
-li {
-  font-size: var(--small)
 }
 
 hr {
