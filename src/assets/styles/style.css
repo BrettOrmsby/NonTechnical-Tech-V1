@@ -1,12 +1,15 @@
 @import url("https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700;1,900&display=swap");
 :root {
+  --margin: 1rem;
+  --small: 0.8rem;
   --primary: #ef5350;
-  --primary-hover: #f44336;
+  --primary-hover: #e13629;
   --secondary: #4db6ac;
-  --secondary-hover: #009688;
+  --secondary-hover: #037d71;
   --gray: #9f9f9f;
   --bg: #212121;
   --title: #d2d2d2;
+  --title-link-hover: #ffffff;
   --color: #e4e4e4;
   --border: #575757;
   --layer: #2f2f2f;
@@ -16,13 +19,14 @@
 @media (prefers-color-scheme: light) {
   :root {
     --primary: #ef5350;
-    --primary-hover: #f44336;
+    --primary-hover: #e13629;
     --secondary: #4db6ac;
-    --secondary-hover: #009688;
+    --secondary-hover: #037d71;
     --gray: #7f7f7f;
     --bg: white;
     --title: #212121;
     --color: #424242;
+    --title-link-hover: #424242;
     --border: #e0e0e0;
     --layer: #eeeeee;
     --code: #2f2f2f;
@@ -32,36 +36,29 @@
 @media only screen and (max-width: 600px) {
   :root {
     font-size: 16px;
-    --container-padding: 1rem;
-    --split-width: 100%;
   }
 }
 @media only screen and (min-width: 600px) {
   :root {
     font-size: 17px;
-    --container-padding: 1.5rem;
-    --split-width: 100%;
   }
 }
 @media only screen and (min-width: 768px) {
   :root {
     font-size: 18px;
-    --container-padding: 2rem;
-    --split-width: 45%;
+  }
+  .split > * {
+    width: 45%;
   }
 }
 @media only screen and (min-width: 992px) {
   :root {
     font-size: 19px;
-    --container-padding: 3rem;
-    --split-width: 45%;
   }
 }
 @media only screen and (min-width: 1200px) {
   :root {
     font-size: 20px;
-    --container-padding: 4rem;
-    --split-width: 45%;
   }
 }
 
@@ -69,15 +66,10 @@
   box-sizing: border-box;
 }
 
-* + * {
-  margin: 1rem 0;
-}
-
 html {
   font-family: "Source Sans Pro", sans-serif;
   background-color: var(--bg);
   color: var(--color);
-  margin:0;
 }
 body {
   margin: 0;
@@ -90,27 +82,23 @@ body {
   justify-content: space-between;
 }
 
-p, blockquote {word-break: break-word;}
+p, blockquote { word-break: break-word; }
 span.gray { color: var(--gray) }
 span.primary { color: var(--primary) }
 span.secondary { color: var(--secondary) }
-span.monospace {font-family: "Source Code Pro", monospace;}
+span.monospace { font-family: "Source Code Pro", monospace; }
+small { font-size: var(--small) }
 
 .split {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: flex-start;
   flex-wrap: wrap;
   flex-direction: row;
 }
-.split > * {
-  width: var(--split-width);
-  margin: 1rem 0.5rem;
-}
 
 .container {
-  padding: var(--container-padding) var(--container-padding) 0 var(--container-padding);;
-  margin: auto 0;
+  padding: 0 1rem 0 1rem;
 }
 
 h6 {
@@ -130,7 +118,7 @@ h2 {
 }
 h1 {
   font-size: 2.5rem;
-  margin-top:2rem;
+  margin-top: 4rem;
   text-align: center;
 }
 h1,
@@ -140,6 +128,10 @@ h4,
 h5,
 h6 {
   color: var(--title);
+}
+
+blockquote, p, table, pre, .card, button {
+  margin-bottom: var(--margin);
 }
 
 button {
@@ -181,9 +173,10 @@ mark {
 
 code {
   font-family: "Source Code Pro", sans-serif;
-  padding: 0rem 0.5rem;
+  padding: 0.1rem 0.4rem;
   background-color: var(--layer);
-  border-radius: 0.3rem;
+  border-radius: 0.2rem;
+  font-size: var(--small);
 }
 pre {
   overflow: auto;
@@ -196,7 +189,7 @@ pre > code {
   margin: 0;
   word-break: normal;
   white-space: pre;
-  font-size: 0.8rem;
+  font-size: var(--small);
 }
 
 blockquote {
@@ -205,11 +198,9 @@ blockquote {
   border-left: 0.5rem solid var(--border);
 }
 
-summary {cursor:pointer}
+summary { cursor:pointer }
 
-img {
-  width: 100%;
-}
+img { width: 100%; }
 
 table {
   border-spacing: 0;
@@ -229,6 +220,11 @@ td {
   border: 1px solid var(--border);
 }
 
+li {
+  color:var(--gray);
+  font-size: var(--small)
+}
+
 hr {
   height: 0.2rem;
   background-color: var(--border);
@@ -236,172 +232,46 @@ hr {
 }
 
 .card {
-  padding: 1rem;
   border-radius: 0.5rem;
   background-color: var(--layer);
+  overflow: hidden;
+}
+.card .content {
+  padding: 1rem;
+}
+.card h3 {
+  margin-bottom: 0.2rem;
+  margin-top: 0;
+}
+.card a {
+  text-decoration: none;
+}
+.card h3:hover {
+  color: var(--title-link-hover);
+}
+.card .tags {
+  margin-bottom: 0.2rem;
+}
+.card img {
+  width: 100%;
+  object-fit: cover;
+  height: 250px;
+}
+.card p {
+  margin-top: 0;
+  margin-bottom: 0.2rem;
 }
 
+.tag::before {
+  content: "#";
+}
 .tag {
   cursor:pointer;
-  font-size: 0.8rem;
-  padding: 0.5rem;
+  font-size: var(--small);
   display: inline-block;
-  border-radius: 2rem;
-  border: 0.1rem solid var(--primary);
   color: var(--primary);
-  background-color: transparent;
-   margin: 0.5rem;
+  margin-right: 0.5rem;
 }
 .tag:hover {
-  color: var(--bg);
-  background-color: var(--primary);
-}
-.navbar {
-  background-color: var(--layer);
-  display:flex;
-  align-items:center;
-  justify-content: space-between;
-  padding: 0 1rem;
-  border-bottom: 0.05rem solid var(--border);
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 10;
-}
-.footer {
-  background-color: var(--layer);
-  padding: 1rem;
-  width:100%;
-  border-top: 0.05rem solid var(--border);
-  margin-bottom:0;
-  margin-top: 0;
-  top: 1rem;
-  position: relative;
-}
-.footerLinks {
-  display:flex;
-  justify-content:space-around;
-  align-items:center;
-}
-
-.md {
-  max-width: 700px;
-  margin: 0 auto;
-}
-
-/*!
-  Theme: GitHub Dark
-  Description: Dark theme as seen on github.com
-  Author: github.com
-  Maintainer: @Hirse
-  Updated: 2021-05-15
-  Outdated base version: https://github.com/primer/github-syntax-dark
-  Current colors taken from GitHub's CSS
-*/
-
-.hljs {
-  color: #c9d1d9;
-  background: var(--code);
-}
-
-.hljs-doctag,
-.hljs-keyword,
-.hljs-meta .hljs-keyword,
-.hljs-template-tag,
-.hljs-template-variable,
-.hljs-type,
-.hljs-variable.language_ {
-  /* prettylights-syntax-keyword */
-  color: #ff7b72;
-}
-
-.hljs-title,
-.hljs-title.class_,
-.hljs-title.class_.inherited__,
-.hljs-title.function_ {
-  /* prettylights-syntax-entity */
-  color: #d2a8ff;
-}
-
-.hljs-attr,
-.hljs-attribute,
-.hljs-literal,
-.hljs-meta,
-.hljs-number,
-.hljs-operator,
-.hljs-variable,
-.hljs-selector-attr,
-.hljs-selector-class,
-.hljs-selector-id {
-  /* prettylights-syntax-constant */
-  color: #79c0ff;
-}
-
-.hljs-regexp,
-.hljs-string,
-.hljs-meta .hljs-string {
-  /* prettylights-syntax-string */
-  color: #a5d6ff;
-}
-
-.hljs-built_in,
-.hljs-symbol {
-  /* prettylights-syntax-variable */
-  color: #ffa657;
-}
-
-.hljs-comment,
-.hljs-code,
-.hljs-formula {
-  /* prettylights-syntax-comment */
-  color: #8b949e;
-}
-
-.hljs-name,
-.hljs-quote,
-.hljs-selector-tag,
-.hljs-selector-pseudo {
-  /* prettylights-syntax-entity-tag */
-  color: #7ee787;
-}
-
-.hljs-subst {
-  /* prettylights-syntax-storage-modifier-import */
-  color: #c9d1d9;
-}
-
-.hljs-section {
-  /* prettylights-syntax-markup-heading */
-  color: #1f6feb;
-  font-weight: bold;
-}
-
-.hljs-bullet {
-  /* prettylights-syntax-markup-list */
-  color: #f2cc60;
-}
-
-.hljs-emphasis {
-  /* prettylights-syntax-markup-italic */
-  color: #c9d1d9;
-  font-style: italic;
-}
-
-.hljs-strong {
-  /* prettylights-syntax-markup-bold */
-  color: #c9d1d9;
-  font-weight: bold;
-}
-
-.hljs-addition {
-  /* prettylights-syntax-markup-inserted */
-  color: #aff5b4;
-  background-color: #033a16;
-}
-
-.hljs-deletion {
-  /* prettylights-syntax-markup-deleted */
-  color: #ffdcd7;
-  background-color: #67060c;
+  color: var(--primary-hover);
 }

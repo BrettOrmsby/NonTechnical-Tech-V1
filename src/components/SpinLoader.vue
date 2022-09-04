@@ -1,5 +1,5 @@
 <template>
-  <div style="display: flex; justify-content: center; width: 100%">
+  <div>
     <vue-feather
       size="2rem"
       type="loader"
@@ -14,3 +14,11 @@ export default {
   name: "SpinLoader",
 };
 </script>
+
+<style scoped>
+div {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+</style>

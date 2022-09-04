@@ -5,7 +5,7 @@
   </h1>
   <SpinLoader v-if="loading" />
   <h2 v-else-if="error">There Was An Error</h2>
-  <div v-else class="split" style="margin: 0">
+  <div v-else class="split">
     <ArticleCard
       v-for="article in [...articles].reverse()"
       :key="article.id"
@@ -34,22 +34,23 @@ export default {
           readTime: "",
           tags: [],
           description: "",
+          image: "",
         },
       ],
     };
   },
   async mounted() {
-    let data = await this.$supabase.storage
-      .from("articles")
-      .download("blogStorage.json");
-    if (data.error !== null) {
-      console.log(data.error);
+    const response = await fetch(
+      `${process.env.VUE_APP_SUPABASE_URL}/storage/v1/object/public/storage/data/blogStorage.json`
+    );
+    if (!response.ok) {
+      console.log(`An error has occured: ${response.status}`);
       this.loading = false;
       this.error = true;
       return;
     }
-    let articles = JSON.parse(await data.data.text()).articles;
-    this.articles = articles;
+    const data = await response.json();
+    this.articles = data.articles;
     this.loading = false;
   },
 };
