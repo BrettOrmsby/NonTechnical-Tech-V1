@@ -79,32 +79,32 @@ export default {
     loadArticle.bind(this)();
     loadProject.bind(this)();
     async function loadArticle() {
-      let articleData = await this.$supabase.storage
-        .from("articles")
-        .download("blogStorage.json");
-      if (articleData.error !== null) {
-        console.log(articleData.error);
+      const response = await fetch(
+        `${process.env.VUE_APP_SUPABASE_URL}/storage/v1/object/public/storage/data/blogStorage.json`
+      );
+      if (!response.ok) {
+        console.log(`An error has occured: ${response.status}`);
         this.loadingArticle = false;
         this.errorArticle = true;
-      } else {
-        let articles = JSON.parse(await articleData.data.text()).articles;
-        this.articles = articles;
-        this.loadingArticle = false;
+        return;
       }
+      const data = await response.json();
+      this.articles = data.articles;
+      this.loadingArticle = false;
     }
     async function loadProject() {
-      let projectData = await this.$supabase.storage
-        .from("articles")
-        .download("projectStorage.json");
-      if (projectData.error !== null) {
-        console.log(projectData.error);
+      const response = await fetch(
+        `${process.env.VUE_APP_SUPABASE_URL}/storage/v1/object/public/storage/data/projectStorage.json`
+      );
+      if (!response.ok) {
+        console.log(`An error has occured: ${response.status}`);
         this.loadingProject = false;
         this.errorProject = true;
-      } else {
-        let projects = JSON.parse(await projectData.data.text()).projects;
-        this.projects = projects;
-        this.loadingProject = false;
+        return;
       }
+      const data = await response.json();
+      this.projects = data.projects;
+      this.loadingProject = false;
     }
   },
 };

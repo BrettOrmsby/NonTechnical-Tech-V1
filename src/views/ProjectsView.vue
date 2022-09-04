@@ -39,17 +39,17 @@ export default {
     };
   },
   async mounted() {
-    let data = await this.$supabase.storage
-      .from("articles")
-      .download("projectStorage.json");
-    if (data.error !== null) {
-      console.log(data.error);
+    const response = await fetch(
+      `${process.env.VUE_APP_SUPABASE_URL}/storage/v1/object/public/storage/data/projectStorage.json`
+    );
+    if (!response.ok) {
+      console.log(`An error has occured: ${response.status}`);
       this.loading = false;
       this.error = true;
       return;
     }
-    let projects = JSON.parse(await data.data.text()).projects;
-    this.projects = projects;
+    const data = await response.json();
+    this.projects = data.projects;
     this.loading = false;
   },
 };

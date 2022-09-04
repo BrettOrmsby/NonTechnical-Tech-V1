@@ -64,8 +64,7 @@ export default {
           return hljs.highlight(code, { language }).value;
         },
         langPrefix: "hljs language-",
-        baseUrl:
-          "https://wfrgrcqleolejyoojiwj.supabase.co/storage/v1/object/public/images/",
+        baseUrl: `${process.env.VUE_APP_SUPABASE_URL}/storage/v1/object/public/storage/articles/${this.article.path}/`,
         headerPrefix: "",
       });
       return marked.parse(this.markdown);
@@ -73,16 +72,17 @@ export default {
   },
   async mounted() {
     let id = this.id;
-    let data = await this.$supabase.storage
-      .from("articles")
-      .download("blogStorage.json");
-    if (data.error !== null) {
-      console.log(data.error);
+    const response = await fetch(
+      `${process.env.VUE_APP_SUPABASE_URL}/storage/v1/object/public/storage/data/blogStorage.json`
+    );
+    if (!response.ok) {
+      console.log(`An error has occured: ${response.status}`);
       this.loading = false;
       this.error = true;
       return;
     }
-    let articles = JSON.parse(await data.data.text()).articles;
+    const data = await response.json();
+    let articles = data.articles;
     let currentArticle = articles.filter((e) => e.id === id)[0];
     if (currentArticle) {
       this.article = currentArticle;
@@ -91,17 +91,17 @@ export default {
       window.location = "/404";
       return;
     }
-    data = await this.$supabase.storage
-      .from("articles")
-      .download("markdown/" + currentArticle.path + ".md");
-    if (data.error !== null) {
-      console.log(data.error);
+    const markdownResponse = await fetch(
+      `${process.env.VUE_APP_SUPABASE_URL}/storage/v1/object/public/storage/articles/${currentArticle.path}/markdown.md`
+    );
+    if (!markdownResponse.ok) {
+      console.log(`An error has occured: ${markdownResponse.status}`);
       this.loading = false;
       this.error = true;
       return;
     }
+    this.markdown = await markdownResponse.text();
     this.loading = false;
-    this.markdown = await data.data.text();
   },
 };
 </script>
