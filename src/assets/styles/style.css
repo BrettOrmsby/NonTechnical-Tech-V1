@@ -220,6 +220,11 @@ td {
   border: 1px solid var(--border);
 }
 
+li {
+  color:var(--gray);
+  font-size: var(--small)
+}
+
 hr {
   height: 0.2rem;
   background-color: var(--border);
