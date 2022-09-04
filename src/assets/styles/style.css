@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700;1,900&display=swap");
 :root {
   --margin: 1rem;
-  --small: 0.8rem;
+  --small: 0.8em;
   --primary: #ef5350;
   --primary-hover: #e13629;
   --secondary: #4db6ac;
@@ -173,9 +173,9 @@ mark {
 
 code {
   font-family: "Source Code Pro", sans-serif;
-  padding: 0.1rem 0.4rem;
+  padding: 0.1em 0.4em;
   background-color: var(--layer);
-  border-radius: 0.2rem;
+  border-radius: 0.2em;
   font-size: var(--small);
 }
 pre {
@@ -221,7 +221,6 @@ td {
 }
 
 li {
-  color:var(--gray);
   font-size: var(--small)
 }
 

@@ -113,6 +113,6 @@ export default {
   margin: 0 auto;
 }
 .spacer {
-  margin-top: 3rem;
+  margin-top: 4rem;
 }
 </style>
