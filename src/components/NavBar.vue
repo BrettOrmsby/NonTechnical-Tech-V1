@@ -8,27 +8,19 @@
     <div class="button-container">
       <router-link to="/search"
         ><button>
-          <vue-feather
-            type="search"
-            stroke="var(--color)"
-            size="1rem"
-          /></button
+          <vue-feather type="search" stroke="var(--bg)" size="1rem" /></button
       ></router-link>
       <router-link to="/articles"
         ><button>
-          <vue-feather type="book" stroke="var(--color)" size="1rem" /></button
+          <vue-feather type="book" stroke="var(--bg)" size="1rem" /></button
       ></router-link>
       <router-link to="/projects"
         ><button>
-          <vue-feather type="code" stroke="var(--color)" size="1rem" /></button
+          <vue-feather type="code" stroke="var(--bg)" size="1rem" /></button
       ></router-link>
       <a href="https://github.com/BrettOrmsby/blog"
         ><button class="secondary">
-          <vue-feather
-            type="github"
-            stroke="var(--color)"
-            size="1rem"
-          /></button
+          <vue-feather type="github" stroke="var(--bg)" size="1rem" /></button
       ></a>
     </div>
   </nav>
@@ -72,6 +64,7 @@ export default {
   justify-content: space-around;
 }
 button {
+  margin: 0;
   margin-left: 1em;
   display: flex;
   align-items: center;

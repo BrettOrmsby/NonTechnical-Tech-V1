@@ -1,47 +1,49 @@
 <template>
   <h1>Search</h1>
   <div class="card">
-    <div class="split">
-      <input type="text" v-model="query.title" placeholder="Search Title" />
-      <div>
-        <b>Show</b>
-        <label class="flex" for="all"
-          ><input
-            id="all"
-            type="radio"
-            name="type"
-            value="all"
-            v-model="query.type"
-          />All</label
-        >
-        <label class="flex" for="article"
-          ><input
-            id="article"
-            type="radio"
-            name="type"
-            value="article"
-            v-model="query.type"
-          />Articles</label
-        >
-        <label class="flex" for="project"
-          ><input
-            id="project"
-            type="radio"
-            name="type"
-            value="project"
-            v-model="query.type"
-          />Projects</label
-        >
+    <div class="content">
+      <div class="split">
+        <input type="text" v-model="query.title" placeholder="Search Title" />
+        <div>
+          <b>Show</b>
+          <label class="flex" for="all"
+            ><input
+              id="all"
+              type="radio"
+              name="type"
+              value="all"
+              v-model="query.type"
+            />All</label
+          >
+          <label class="flex" for="article"
+            ><input
+              id="article"
+              type="radio"
+              name="type"
+              value="article"
+              v-model="query.type"
+            />Articles</label
+          >
+          <label class="flex" for="project"
+            ><input
+              id="project"
+              type="radio"
+              name="type"
+              value="project"
+              v-model="query.type"
+            />Projects</label
+          >
+        </div>
       </div>
+      <template v-for="(tag, index) in allTags" :key="index">
+        <span
+          class="tag"
+          :class="{ click: queryTags.includes(tag) }"
+          @click="tagClick"
+          >{{ tag }}</span
+        >
+      </template>
     </div>
-    <template v-for="(tag, index) in allTags" :key="index">
-      <span
-        class="tag noHover"
-        :class="{ click: queryTags.includes(tag) }"
-        @click="tagClick"
-        >{{ tag }}</span
-      >
-    </template>
   </div>
   <SpinLoader v-if="loading" />
   <h2 v-else-if="error">There Was An Error</h2>
@@ -227,12 +229,7 @@ input[type="radio"] {
 input[type="radio"]:checked {
   background-color: var(--primary);
 }
-.noHover {
-  color: var(--primary);
-  background-color: transparent;
-}
 .click {
-  color: var(--bg);
-  background-color: var(--primary);
+  text-decoration: underline;
 }
 </style>

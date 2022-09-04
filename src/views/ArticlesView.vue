@@ -34,6 +34,7 @@ export default {
           readTime: "",
           tags: [],
           description: "",
+          image: "",
         },
       ],
     };

@@ -1,21 +1,26 @@
 <template>
   <div class="card">
-    <h3>{{ article.name }}</h3>
-    <div class="tags">
-      <TagList :tags="article.tags" />
-    </div>
-    <p>
-      <small>
-        {{ article.date }} <span class="primary">•</span>
-        {{ article.readTime }}min read</small
-      >
-      <br />
-      {{ article.description }}
-      <br />
+    <router-link
+      v-if="article.image"
+      :to="{ name: 'article', params: { id: article.id } }"
+      ><img :src="article.image"
+    /></router-link>
+    <div class="content">
       <router-link :to="{ name: 'article', params: { id: article.id } }"
-        >Read</router-link
+        ><h3>{{ article.name }}</h3></router-link
       >
-    </p>
+      <div class="tags">
+        <TagList :tags="article.tags" />
+      </div>
+      <p>
+        <small>
+          {{ article.date }} <span class="primary">•</span>
+          {{ article.readTime }}min read</small
+        >
+        <br />
+        {{ article.description }}
+      </p>
+    </div>
   </div>
 </template>
 

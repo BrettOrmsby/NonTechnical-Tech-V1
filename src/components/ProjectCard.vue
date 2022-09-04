@@ -1,15 +1,17 @@
 <template>
   <div class="card">
-    <h3>{{ project.name }}</h3>
-    <div>
-      <TagList :tags="project.tags" />
+    <a :href="project.link"><img :src="project.image" /></a>
+    <div class="content">
+      <a :href="project.link"
+        ><h3>{{ project.name }}</h3></a
+      >
+      <div>
+        <TagList :tags="project.tags" />
+      </div>
+      <p>
+        {{ project.description }}
+      </p>
     </div>
-    <img :src="project.image" />
-    <p>
-      {{ project.description }}
-      <br />
-      <a :href="project.link">Visit</a>
-    </p>
   </div>
 </template>
 
@@ -21,16 +23,3 @@ export default {
   props: ["project"],
 };
 </script>
-
-<style scoped>
-img {
-  display: block;
-  margin: 0 auto;
-  height: auto;
-  width: auto;
-  object-fit: cover;
-  width: 100%;
-  max-height: 15rem;
-  margin-top: 1rem;
-}
-</style>

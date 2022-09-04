@@ -7,23 +7,25 @@
   <template v-else>
     <h1>{{ article.name }}</h1>
     <div class="card" style="max-width: 700px; margin: 0 auto">
-      <span
-        v-for="(tag, index) in [...article.tags].sort((a, b) =>
-          a.localeCompare(b)
-        )"
-        :key="index"
-        class="tag"
-        style="margin-bottom: 0"
-        >{{ tag }}</span
-      >
-      <p>
-        <small>
-          {{ article.date }} <span class="primary">•</span>
-          {{ article.readTime }}min read</small
+      <div class="content">
+        <span
+          v-for="(tag, index) in [...article.tags].sort((a, b) =>
+            a.localeCompare(b)
+          )"
+          :key="index"
+          class="tag"
+          style="margin-bottom: 0"
+          >{{ tag }}</span
         >
-        <br />
-        {{ article.description }}
-      </p>
+        <p>
+          <small>
+            {{ article.date }} <span class="primary">•</span>
+            {{ article.readTime }}min read</small
+          >
+          <br />
+          {{ article.description }}
+        </p>
+      </div>
     </div>
     <div v-html="md2html" class="md"></div>
   </template>

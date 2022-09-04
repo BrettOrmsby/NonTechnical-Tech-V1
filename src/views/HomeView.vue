@@ -4,10 +4,12 @@
       ><strong><span class="primary">Non</span>Technical Tech</strong></span
     >
   </h1>
-  <p class="card" style="text-align: center">
-    Hi, I'm Brett Ormsby and I write this non-technical blog for fun! My current
-    Interests are Scriptable, Vue.js and JavaScript.
-  </p>
+  <div class="card" style="text-align: center">
+    <p class="content">
+      Hi, I'm Brett Ormsby and I write this non-technical blog for fun! My
+      current Interests are Scriptable, Vue.js and JavaScript.
+    </p>
+  </div>
 
   <div class="split">
     <div>
@@ -49,6 +51,7 @@ export default {
           readTime: "",
           tags: [],
           description: "",
+          image: "",
         },
       ],
       loadingProject: true,
