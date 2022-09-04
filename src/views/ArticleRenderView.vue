@@ -3,7 +3,7 @@
     <div class="spacer"></div>
     <SpinLoader />
   </template>
-  <h1 v-else-if="error">There Was an Error</h1>
+  <h1 v-else-if="error">An Error Occurred</h1>
   <template v-else>
     <h1>{{ article.name }}</h1>
     <div class="card" style="max-width: 700px; margin: 0 auto">
@@ -36,7 +36,7 @@ import { marked } from "marked";
 import hljs from "highlight.js";
 import SpinLoader from "@/components/SpinLoader.vue";
 export default {
-  name: "ArcticleRederView",
+  name: "ArticleRenderView",
   components: {
     SpinLoader,
   },
@@ -76,7 +76,7 @@ export default {
       `${process.env.VUE_APP_SUPABASE_URL}/storage/v1/object/public/storage/data/blogStorage.json`
     );
     if (!response.ok) {
-      console.log(`An error has occured: ${response.status}`);
+      console.log(`An error has occurred: ${response.status}`);
       this.loading = false;
       this.error = true;
       return;
@@ -95,7 +95,7 @@ export default {
       `${process.env.VUE_APP_SUPABASE_URL}/storage/v1/object/public/storage/articles/${currentArticle.path}/markdown.md`
     );
     if (!markdownResponse.ok) {
-      console.log(`An error has occured: ${markdownResponse.status}`);
+      console.log(`An error has occurred: ${markdownResponse.status}`);
       this.loading = false;
       this.error = true;
       return;

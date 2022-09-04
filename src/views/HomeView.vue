@@ -15,14 +15,14 @@
     <div>
       <h2><span class="primary">new</span> Article()</h2>
       <SpinLoader v-if="loadingArticle" />
-      <h3 v-else-if="errorArticle">There Was An Error</h3>
+      <h3 v-else-if="errorArticle">An Error Occurred</h3>
       <ArticleCard v-else :article="latestArticle" />
       <router-link to="articles"><button>View All</button></router-link>
     </div>
     <div>
       <h2><span class="primary">new</span> Project()</h2>
       <SpinLoader v-if="loadingProject" />
-      <h3 v-else-if="errorProject">There Was An Error</h3>
+      <h3 v-else-if="errorProject">An Error Occurred</h3>
       <ProjectCard v-else :project="latestProject" />
       <router-link to="projects"><button>View All</button></router-link>
     </div>
@@ -83,7 +83,7 @@ export default {
         `${process.env.VUE_APP_SUPABASE_URL}/storage/v1/object/public/storage/data/blogStorage.json`
       );
       if (!response.ok) {
-        console.log(`An error has occured: ${response.status}`);
+        console.log(`An error has occurred: ${response.status}`);
         this.loadingArticle = false;
         this.errorArticle = true;
         return;
@@ -97,7 +97,7 @@ export default {
         `${process.env.VUE_APP_SUPABASE_URL}/storage/v1/object/public/storage/data/projectStorage.json`
       );
       if (!response.ok) {
-        console.log(`An error has occured: ${response.status}`);
+        console.log(`An error has occurred: ${response.status}`);
         this.loadingProject = false;
         this.errorProject = true;
         return;

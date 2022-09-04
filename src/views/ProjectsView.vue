@@ -4,7 +4,7 @@
     <span class="primary">Of</span> Projects
   </h1>
   <SpinLoader v-if="loading" />
-  <h2 v-else-if="error">There Was An Error</h2>
+  <h2 v-else-if="error">An Error Occurred</h2>
   <div v-else class="split">
     <ProjectCard
       v-for="(project, index) in [...projects].reverse()"
@@ -43,7 +43,7 @@ export default {
       `${process.env.VUE_APP_SUPABASE_URL}/storage/v1/object/public/storage/data/projectStorage.json`
     );
     if (!response.ok) {
-      console.log(`An error has occured: ${response.status}`);
+      console.log(`An error has occurred: ${response.status}`);
       this.loading = false;
       this.error = true;
       return;
