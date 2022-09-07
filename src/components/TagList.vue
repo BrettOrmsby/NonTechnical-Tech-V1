@@ -1,3 +1,13 @@
+<script>
+export default {
+  name: "TagList",
+};
+</script>
+
+<script setup>
+defineProps(["tags"]);
+</script>
+
 <template>
   <router-link
     v-for="(tag, index) in [...tags].sort((a, b) => a.localeCompare(b))"
@@ -6,10 +16,3 @@
     ><span class="tag">{{ tag }}</span></router-link
   >
 </template>
-
-<script>
-export default {
-  name: "TagList",
-  props: ["tags"],
-};
-</script>

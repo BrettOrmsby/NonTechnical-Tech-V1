@@ -1,3 +1,11 @@
+<script>
+export default { name: "ProjectCard" };
+</script>
+<script setup>
+import TagList from "@/components/TagList.vue";
+defineProps(["project"]);
+</script>
+
 <template>
   <div class="card">
     <a :href="project.link"><img :src="project.image" /></a>
@@ -14,12 +22,3 @@
     </div>
   </div>
 </template>
-
-<script>
-import TagList from "@/components/TagList.vue";
-export default {
-  components: { TagList },
-  name: "ProjectCard",
-  props: ["project"],
-};
-</script>

@@ -1,3 +1,74 @@
+<script>
+export default {
+  name: "ArticleRenderView",
+};
+</script>
+
+<script setup>
+import SpinLoader from "@/components/SpinLoader.vue";
+import { marked } from "marked";
+import hljs from "highlight.js";
+import { ref, computed, onMounted } from "vue";
+import { useRoute } from "vue-router";
+
+const route = useRoute();
+defineProps(["id"]);
+
+const markdown = ref("");
+const id = parseInt(route.params.id);
+const article = ref();
+const loading = ref(true);
+const error = ref(false);
+
+onMounted(async () => {
+  const response = await fetch(
+    `${process.env.VUE_APP_SUPABASE_URL}/storage/v1/object/public/storage/data/blogStorage.json`
+  );
+  if (!response.ok) {
+    console.log(`An error has occurred: ${response.status}`);
+    loading.value = false;
+    loading.value = true;
+    return;
+  }
+  const data = await response.json();
+  let articles = data.articles;
+
+  article.value = articles.filter((e) => e.id === id)[0];
+  if (article.value) {
+    document.title = article.value.name + " | NonTechnical Tech";
+  } else {
+    window.location = "/404";
+    return;
+  }
+
+  const markdownResponse = await fetch(
+    `${process.env.VUE_APP_SUPABASE_URL}/storage/v1/object/public/storage/articles/${article.value.path}/markdown.md`
+  );
+  if (!markdownResponse.ok) {
+    console.log(`An error has occurred: ${markdownResponse.status}`);
+    loading.value = false;
+    loading.value = true;
+    return;
+  }
+  markdown.value = await markdownResponse.text();
+  loading.value = false;
+})();
+
+const md2html = computed(() => {
+  marked.setOptions({
+    renderer: new marked.Renderer(),
+    highlight: function (code, lang) {
+      const language = hljs.getLanguage(lang) ? lang : "plaintext";
+      return hljs.highlight(code, { language }).value;
+    },
+    langPrefix: "hljs language-",
+    baseUrl: `${process.env.VUE_APP_SUPABASE_URL}/storage/v1/object/public/storage/articles/${article.value.path}/`,
+    headerPrefix: "",
+  });
+  return marked.parse(markdown.value);
+});
+</script>
+
 <template>
   <template v-if="loading">
     <div class="spacer"></div>
@@ -30,81 +101,6 @@
     <div v-html="md2html" class="md"></div>
   </template>
 </template>
-
-<script>
-import { marked } from "marked";
-import hljs from "highlight.js";
-import SpinLoader from "@/components/SpinLoader.vue";
-export default {
-  name: "ArticleRenderView",
-  components: {
-    SpinLoader,
-  },
-  data() {
-    return {
-      loading: true,
-      error: false,
-      markdown: "",
-      article: {
-        name: "",
-        date: "",
-        readTime: "",
-        tags: [],
-        description: "",
-      },
-      id: parseInt(this.$route.params.id),
-    };
-  },
-  computed: {
-    md2html() {
-      marked.setOptions({
-        renderer: new marked.Renderer(),
-        highlight: function (code, lang) {
-          const language = hljs.getLanguage(lang) ? lang : "plaintext";
-          return hljs.highlight(code, { language }).value;
-        },
-        langPrefix: "hljs language-",
-        baseUrl: `${process.env.VUE_APP_SUPABASE_URL}/storage/v1/object/public/storage/articles/${this.article.path}/`,
-        headerPrefix: "",
-      });
-      return marked.parse(this.markdown);
-    },
-  },
-  async mounted() {
-    let id = this.id;
-    const response = await fetch(
-      `${process.env.VUE_APP_SUPABASE_URL}/storage/v1/object/public/storage/data/blogStorage.json`
-    );
-    if (!response.ok) {
-      console.log(`An error has occurred: ${response.status}`);
-      this.loading = false;
-      this.error = true;
-      return;
-    }
-    const data = await response.json();
-    let articles = data.articles;
-    let currentArticle = articles.filter((e) => e.id === id)[0];
-    if (currentArticle) {
-      this.article = currentArticle;
-      document.title = currentArticle.name + " | NonTechnical Tech";
-    } else {
-      window.location = "/404";
-      return;
-    }
-    const markdownResponse = await fetch(
-      `${process.env.VUE_APP_SUPABASE_URL}/storage/v1/object/public/storage/articles/${currentArticle.path}/markdown.md`
-    );
-    if (!markdownResponse.ok) {
-      console.log(`An error has occurred: ${markdownResponse.status}`);
-      this.loading = false;
-      this.error = true;
-      return;
-    }
-    this.markdown = await markdownResponse.text();
-    this.loading = false;
-  },
-};
-</script>
 
 <style scoped>
 @import "@/assets/styles/highlight.css";

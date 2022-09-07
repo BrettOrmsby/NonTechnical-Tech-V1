@@ -1,3 +1,20 @@
+<script>
+export default {
+  name: "ArticlesView",
+};
+</script>
+
+<script setup>
+import ArticleCard from "@/components/ArticleCard.vue";
+import SpinLoader from "@/components/SpinLoader.vue";
+import { useFetch } from "@/compostables/fetch.js";
+
+const { data, loading, error } = useFetch(
+  `${process.env.VUE_APP_SUPABASE_URL}/storage/v1/object/public/storage/data/blogStorage.json`,
+  "json"
+);
+</script>
+
 <template>
   <h1>
     <span class="primary">For</span> Article
@@ -7,54 +24,12 @@
   <h2 v-else-if="error">An Error Occurred</h2>
   <div v-else class="split">
     <ArticleCard
-      v-for="article in [...articles].reverse()"
+      v-for="article in [...data.articles].reverse()"
       :key="article.id"
       :article="article"
     />
   </div>
 </template>
-
-<script>
-import ArticleCard from "@/components/ArticleCard.vue";
-import SpinLoader from "@/components/SpinLoader.vue";
-export default {
-  name: "ArticlesView",
-  components: {
-    ArticleCard,
-    SpinLoader,
-  },
-  data() {
-    return {
-      loading: true,
-      error: false,
-      articles: [
-        {
-          name: "",
-          date: "",
-          readTime: "",
-          tags: [],
-          description: "",
-          image: "",
-        },
-      ],
-    };
-  },
-  async mounted() {
-    const response = await fetch(
-      `${process.env.VUE_APP_SUPABASE_URL}/storage/v1/object/public/storage/data/blogStorage.json`
-    );
-    if (!response.ok) {
-      console.log(`An error has occurred: ${response.status}`);
-      this.loading = false;
-      this.error = true;
-      return;
-    }
-    const data = await response.json();
-    this.articles = data.articles;
-    this.loading = false;
-  },
-};
-</script>
 
 <style scoped>
 .card {

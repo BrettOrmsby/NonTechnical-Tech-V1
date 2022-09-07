@@ -1,3 +1,102 @@
+<script>
+export default {
+  name: "SearchView",
+};
+</script>
+
+<script setup>
+import SpinLoader from "@/components/SpinLoader.vue";
+import ArticleCard from "@/components/ArticleCard.vue";
+import ProjectCard from "@/components/ProjectCard.vue";
+import { ref, computed, watch } from "vue";
+import { useFetch } from "@/compostables/fetch.js";
+import { useRoute, useRouter } from "vue-router";
+
+const router = useRouter();
+const route = useRoute();
+
+let { title, tag, type } = route.query;
+const query = ref({
+  tag: tag || "",
+  title: title || "",
+  type: type || "all",
+});
+const queryTags = ref(tag?.split(",") || []);
+
+const {
+  data: articleData,
+  loading: loadingArticle,
+  error: errorArticle,
+} = useFetch(
+  `${process.env.VUE_APP_SUPABASE_URL}/storage/v1/object/public/storage/data/blogStorage.json`,
+  "json"
+);
+const {
+  data: projectData,
+  loading: loadingProject,
+  error: errorProject,
+} = useFetch(
+  `${process.env.VUE_APP_SUPABASE_URL}/storage/v1/object/public/storage/data/projectStorage.json`,
+  "json"
+);
+
+const loading = computed((e) => loadingProject.value || loadingArticle.value);
+const error = computed((e) => errorProject.value || errorArticle.value);
+const articles = computed((e) => articleData.value?.articles || []);
+const projects = computed((e) => projectData.value?.projects || []);
+const allTags = computed(() => {
+  let output = [];
+  for (let item of [...articles.value, ...projects.value]) {
+    output = [...new Set([...output, ...item.tags])];
+  }
+  return output.sort((a, b) => a.localeCompare(b));
+});
+
+const filter = computed(() => {
+  return [...articles.value, ...projects.value].filter((e) => {
+    if (!e.name.toLowerCase().includes(query.value.title.toLowerCase())) {
+      return false;
+    }
+    if (query.value.type === "article" && !e.date) {
+      return false;
+    }
+    if (query.value.type === "project" && !e.link) {
+      return false;
+    }
+    for (let tag of query.value.tag.split(",").filter((e) => e)) {
+      if (!e.tags.includes(tag)) {
+        return false;
+      }
+    }
+    return true;
+  });
+});
+
+watch(
+  () => query,
+  (newer) => {
+    router.replace({ name: "search", query: newer.value });
+  },
+  { deep: true }
+);
+
+watch(queryTags, (newer) => {
+  query.value.tag =
+    newer.filter((e) => e).length === 0 ? "" : newer.filter((e) => e).join(",");
+});
+
+const tagClick = (event) => {
+  let element = event.target;
+  if (queryTags.value.includes(element.innerText)) {
+    queryTags.value = queryTags.value.filter(
+      (item) => item !== element.innerText
+    );
+  } else {
+    queryTags.value = [...queryTags.value, element.innerText];
+  }
+};
+</script>
+
 <template>
   <h1>Search</h1>
   <div class="card">
@@ -55,133 +154,6 @@
     </template>
   </div>
 </template>
-
-<script>
-import SpinLoader from "@/components/SpinLoader.vue";
-import ArticleCard from "@/components/ArticleCard.vue";
-import ProjectCard from "@/components/ProjectCard.vue";
-export default {
-  name: "SearchView",
-  components: {
-    SpinLoader,
-    ArticleCard,
-    ProjectCard,
-  },
-  data() {
-    return {
-      queryTags: [],
-      loadingArticle: true,
-      loadingProject: true,
-      error: false,
-      articles: [],
-      projects: [],
-      query: {
-        tag: "",
-        title: "",
-        type: "all",
-      },
-    };
-  },
-  computed: {
-    loading() {
-      return this.loadingArticle && this.loadingProject;
-    },
-    allTags() {
-      let output = [];
-      for (let item of [...this.articles, ...this.projects]) {
-        output = [...new Set([...output, ...item.tags])];
-      }
-      return output.sort((a, b) => a.localeCompare(b));
-    },
-    filter() {
-      return [...this.articles, ...this.projects].filter((e) => {
-        if (!e.name.toLowerCase().includes(this.query.title.toLowerCase())) {
-          return false;
-        }
-        if (this.query.type === "article" && !e.date) {
-          return false;
-        }
-        if (this.query.type === "project" && !e.link) {
-          return false;
-        }
-        for (let tag of this.query.tag.split(",").filter((e) => e)) {
-          if (!e.tags.includes(tag)) {
-            return false;
-          }
-        }
-        return true;
-      });
-    },
-  },
-  mounted() {
-    let queryParams = this.$route.query;
-    let { title, tag, type } = queryParams;
-    let query = {
-      tag: tag?.split(",") || "",
-      title: title || "",
-      type: type || "all",
-    };
-    this.queryTags = tag?.split(",") || [];
-    this.query = query;
-    loadArticle.bind(this)();
-    loadProject.bind(this)();
-    async function loadArticle() {
-      const response = await fetch(
-        `${process.env.VUE_APP_SUPABASE_URL}/storage/v1/object/public/storage/data/blogStorage.json`
-      );
-      if (!response.ok) {
-        console.log(`An error has occurred: ${response.status}`);
-        this.loadingArticle = false;
-        this.errorArticle = true;
-        return;
-      }
-      const data = await response.json();
-      this.articles = data.articles;
-      this.loadingArticle = false;
-    }
-    async function loadProject() {
-      const response = await fetch(
-        `${process.env.VUE_APP_SUPABASE_URL}/storage/v1/object/public/storage/data/projectStorage.json`
-      );
-      if (!response.ok) {
-        console.log(`An error has occurred: ${response.status}`);
-        this.loadingProject = false;
-        this.errorProject = true;
-        return;
-      }
-      const data = await response.json();
-      this.projects = data.projects;
-      this.loadingProject = false;
-    }
-  },
-  methods: {
-    tagClick(event) {
-      let element = event.target;
-      if (this.queryTags.includes(element.innerText)) {
-        this.queryTags = this.queryTags.filter(
-          (item) => item !== element.innerText
-        );
-      } else {
-        this.queryTags = [...this.queryTags, element.innerText];
-      }
-    },
-  },
-  watch: {
-    query: {
-      handler(newer) {
-        this.$router.replace({ name: "search", query: newer });
-      },
-      deep: true,
-    },
-    queryTags(newer) {
-      this.query.tag =
-        newer.filter((e) => e).length === 0
-          ? ""
-          : newer.filter((e) => e).join(",");
-    },
-  },
-};
-</script>
 
 <style scoped>
 h2 {

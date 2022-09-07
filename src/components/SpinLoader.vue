@@ -1,6 +1,16 @@
+<script>
+export default {
+  name: "SpinLoader",
+};
+</script>
+
+<script setup>
+import VueFeather from "vue-feather";
+</script>
+
 <template>
   <div>
-    <vue-feather
+    <VueFeather
       size="2rem"
       type="loader"
       animation="spin"
@@ -8,12 +18,6 @@
     />
   </div>
 </template>
-
-<script>
-export default {
-  name: "SpinLoader",
-};
-</script>
 
 <style scoped>
 div {

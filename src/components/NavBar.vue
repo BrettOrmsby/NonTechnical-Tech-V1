@@ -1,3 +1,28 @@
+<script>
+export default {
+  name: "NavBar",
+};
+</script>
+
+<script setup>
+import VueFeather from "vue-feather";
+import { onMounted } from "vue";
+
+// Appear nav on scroll up
+onMounted(() => {
+  let prevScrollPos = window.pageYOffset;
+  window.onscroll = function () {
+    let currentScrollPos = window.pageYOffset;
+    if (prevScrollPos > currentScrollPos) {
+      document.getElementById("navbar").style.position = "fixed";
+    } else {
+      document.getElementById("navbar").style.position = "absolute";
+    }
+    prevScrollPos = currentScrollPos;
+  };
+});
+</script>
+
 <template>
   <nav class="navbar" id="navbar">
     <router-link to="/" style="text-decoration: none; color: inherit">
@@ -25,24 +50,6 @@
     </div>
   </nav>
 </template>
-
-<script>
-export default {
-  name: "NavBar",
-  created() {
-    let prevScrollPos = window.pageYOffset;
-    window.onscroll = function () {
-      let currentScrollPos = window.pageYOffset;
-      if (prevScrollPos > currentScrollPos) {
-        document.getElementById("navbar").style.position = "fixed";
-      } else {
-        document.getElementById("navbar").style.position = "absolute";
-      }
-      prevScrollPos = currentScrollPos;
-    };
-  },
-};
-</script>
 
 <style scoped>
 .navbar {
