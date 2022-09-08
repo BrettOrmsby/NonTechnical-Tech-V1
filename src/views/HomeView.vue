@@ -1,3 +1,42 @@
+<script>
+export default {
+  name: "HomeView",
+};
+</script>
+<script setup>
+import SpinLoader from "@/components/SpinLoader.vue";
+import ArticleCard from "@/components/ArticleCard.vue";
+import ProjectCard from "@/components/ProjectCard.vue";
+import { computed } from "vue";
+import { useFetch } from "@/compostables/fetch.js";
+const {
+  data: articleData,
+  loading: loadingArticle,
+  error: errorArticle,
+} = useFetch(
+  `${process.env.VUE_APP_SUPABASE_URL}/storage/v1/object/public/storage/data/blogStorage.json`,
+  "json"
+);
+const {
+  data: projectData,
+  loading: loadingProject,
+  error: errorProject,
+} = useFetch(
+  `${process.env.VUE_APP_SUPABASE_URL}/storage/v1/object/public/storage/data/projectStorage.json`,
+  "json"
+);
+const latestArticle = computed(() =>
+  articleData.value.articles
+    ? articleData.value.articles[articleData.value.articles.length - 1]
+    : {}
+);
+const latestProject = computed(() =>
+  projectData.value.projects
+    ? projectData.value.projects[projectData.value.projects.length - 1]
+    : {}
+);
+</script>
+
 <template>
   <h1>
     <span class="monospace"
@@ -28,84 +67,3 @@
     </div>
   </div>
 </template>
-
-<script>
-import SpinLoader from "@/components/SpinLoader.vue";
-import ArticleCard from "@/components/ArticleCard.vue";
-import ProjectCard from "@/components/ProjectCard.vue";
-export default {
-  name: "HomeView",
-  components: {
-    SpinLoader,
-    ArticleCard,
-    ProjectCard,
-  },
-  data() {
-    return {
-      loadingArticle: true,
-      errorArticle: false,
-      articles: [
-        {
-          name: "",
-          date: "",
-          readTime: "",
-          tags: [],
-          description: "",
-          image: "",
-        },
-      ],
-      loadingProject: true,
-      errorProject: false,
-      projects: [
-        {
-          name: "",
-          image: "",
-          link: "",
-          tags: [],
-          description: "",
-        },
-      ],
-    };
-  },
-  computed: {
-    latestArticle() {
-      return this.articles[this.articles.length - 1];
-    },
-    latestProject() {
-      return this.projects[this.projects.length - 1];
-    },
-  },
-  mounted() {
-    loadArticle.bind(this)();
-    loadProject.bind(this)();
-    async function loadArticle() {
-      const response = await fetch(
-        `${process.env.VUE_APP_SUPABASE_URL}/storage/v1/object/public/storage/data/blogStorage.json`
-      );
-      if (!response.ok) {
-        console.log(`An error has occurred: ${response.status}`);
-        this.loadingArticle = false;
-        this.errorArticle = true;
-        return;
-      }
-      const data = await response.json();
-      this.articles = data.articles;
-      this.loadingArticle = false;
-    }
-    async function loadProject() {
-      const response = await fetch(
-        `${process.env.VUE_APP_SUPABASE_URL}/storage/v1/object/public/storage/data/projectStorage.json`
-      );
-      if (!response.ok) {
-        console.log(`An error has occurred: ${response.status}`);
-        this.loadingProject = false;
-        this.errorProject = true;
-        return;
-      }
-      const data = await response.json();
-      this.projects = data.projects;
-      this.loadingProject = false;
-    }
-  },
-};
-</script>

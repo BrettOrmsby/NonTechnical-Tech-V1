@@ -1,9 +1,30 @@
+<script>
+export default {
+  name: "ArticleCard",
+};
+</script>
+
+<script setup>
+import { computed } from "vue";
+import TagList from "@/components/TagList.vue";
+
+const props = defineProps(["article"]);
+
+// Prefix relative links
+const imageSrc = computed(() => {
+  if (!props.article.image.startsWith("https://")) {
+    return `${process.env.VUE_APP_SUPABASE_URL}/storage/v1/object/public/storage/articles/${props.article.path}/${props.article.image}`;
+  }
+  return props.article.image;
+});
+</script>
+
 <template>
   <div class="card">
     <router-link
       v-if="article.image"
       :to="{ name: 'article', params: { id: article.id } }"
-      ><img :src="replacedRelativeLink"
+      ><img :src="imageSrc"
     /></router-link>
     <div class="content">
       <router-link :to="{ name: 'article', params: { id: article.id } }"
@@ -23,20 +44,3 @@
     </div>
   </div>
 </template>
-
-<script>
-import TagList from "@/components/TagList.vue";
-export default {
-  components: { TagList },
-  name: "ArticleCard",
-  props: ["article"],
-  computed: {
-    replacedRelativeLink() {
-      if (!this.article.image.startsWith("https://")) {
-        return `${process.env.VUE_APP_SUPABASE_URL}/storage/v1/object/public/storage/articles/${this.article.path}/${this.article.image}`;
-      }
-      return this.article.image;
-    },
-  },
-};
-</script>

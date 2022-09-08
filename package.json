@@ -3,21 +3,19 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
+    "serve": "vue-cli-service lint --fix && vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
     "core-js": "^3.8.3",
     "feather-icons": "^4.29.0",
-    "fs": "^0.0.1-security",
     "highlight.js": "^11.6.0",
     "marked": "^4.0.18",
     "vue": "^3.2.37",
     "vue-feather": "^2.0.0",
     "vue-feather-icon": "^1.2.0",
-    "vue-router": "^4.0.3",
-    "vue-supabase": "^2.3.0"
+    "vue-router": "^4.0.3"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",
@@ -33,6 +31,9 @@
     "prettier": "^2.4.1"
   },
   "eslintConfig": {
+    "globals": {
+      "defineProps": "readonly"
+    },
     "root": true,
     "env": {
       "node": true
@@ -45,7 +46,9 @@
     "parserOptions": {
       "parser": "@babel/eslint-parser"
     },
-    "rules": {}
+    "rules": {
+      "no-undef": "off"
+    }
   },
   "browserslist": [
     "> 1%",

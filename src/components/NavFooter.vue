@@ -1,3 +1,9 @@
+<script>
+export default {
+  name: "NavFooter",
+};
+</script>
+
 <template>
   <footer class="footer">
     <div class="footerLinks">
@@ -10,12 +16,6 @@
     <small><span class="primary">Non</span>Technical Tech 2022 ©</small>
   </footer>
 </template>
-
-<script>
-export default {
-  name: "NavFooter",
-};
-</script>
 
 <style scoped>
 .footer {
