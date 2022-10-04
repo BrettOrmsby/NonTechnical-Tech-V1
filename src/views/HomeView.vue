@@ -8,7 +8,7 @@ import SpinLoader from "@/components/SpinLoader.vue";
 import ArticleCard from "@/components/ArticleCard.vue";
 import ProjectCard from "@/components/ProjectCard.vue";
 import { computed } from "vue";
-import { useFetch } from "@/compostables/fetch.js";
+import { useFetch } from "@/composables/fetch.js";
 const {
   data: articleData,
   loading: loadingArticle,

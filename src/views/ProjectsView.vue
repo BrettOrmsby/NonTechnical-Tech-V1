@@ -7,7 +7,7 @@ export default {
 <script setup>
 import ProjectCard from "@/components/ProjectCard.vue";
 import SpinLoader from "@/components/SpinLoader.vue";
-import { useFetch } from "@/compostables/fetch.js";
+import { useFetch } from "@/composables/fetch.js";
 
 const { data, loading, error } = useFetch(
   `${process.env.VUE_APP_SUPABASE_URL}/storage/v1/object/public/storage/data/projectStorage.json`,

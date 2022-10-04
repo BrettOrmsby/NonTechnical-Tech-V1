@@ -10,7 +10,7 @@
   --bg: #212121;
   --title: #d2d2d2;
   --title-link-hover: #ffffff;
-  --color: #e4e4e4;
+  --color: #cdcdcd;
   --border: #575757;
   --layer: #2f2f2f;
   --code: #2f2f2f;
@@ -35,17 +35,17 @@
 
 @media only screen and (max-width: 600px) {
   :root {
-    font-size: 16px;
+    font-size: 17px;
   }
 }
 @media only screen and (min-width: 600px) {
   :root {
-    font-size: 17px;
+    font-size: 18px;
   }
 }
 @media only screen and (min-width: 768px) {
   :root {
-    font-size: 18px;
+    font-size: 19px;
   }
   .split > * {
     width: 45%;
@@ -53,7 +53,7 @@
 }
 @media only screen and (min-width: 992px) {
   :root {
-    font-size: 19px;
+    font-size: 20px;
   }
 }
 @media only screen and (min-width: 1200px) {
@@ -70,6 +70,7 @@ html {
   font-family: "Source Sans Pro", sans-serif;
   background-color: var(--bg);
   color: var(--color);
+  line-height: 1.5;
 }
 body {
   margin: 0;

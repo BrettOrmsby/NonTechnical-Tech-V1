@@ -9,7 +9,7 @@ import SpinLoader from "@/components/SpinLoader.vue";
 import ArticleCard from "@/components/ArticleCard.vue";
 import ProjectCard from "@/components/ProjectCard.vue";
 import { ref, computed, watch } from "vue";
-import { useFetch } from "@/compostables/fetch.js";
+import { useFetch } from "@/composables/fetch.js";
 import { useRoute, useRouter } from "vue-router";
 
 const router = useRouter();
