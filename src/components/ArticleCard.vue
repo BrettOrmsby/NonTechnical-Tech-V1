@@ -44,3 +44,9 @@ const imageSrc = computed(() => {
     </div>
   </div>
 </template>
+
+<style scoped>
+.card {
+  max-width: 450px;
+}
+</style>

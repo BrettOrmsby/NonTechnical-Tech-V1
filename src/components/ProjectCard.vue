@@ -22,3 +22,9 @@ defineProps(["project"]);
     </div>
   </div>
 </template>
+
+<style scoped>
+.card {
+  max-width: 450px;
+}
+</style>

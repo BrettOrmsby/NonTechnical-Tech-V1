@@ -129,6 +129,7 @@ h4,
 h5,
 h6 {
   color: var(--title);
+  line-height: 1.1;
 }
 
 blockquote, p, table, pre, .card, button {
@@ -269,4 +270,12 @@ hr {
 }
 .tag:hover {
   color: var(--primary-hover);
+}
+
+.card-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  row-gap: 1rem;
+  column-gap: 2rem;
 }

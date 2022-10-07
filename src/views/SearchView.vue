@@ -147,7 +147,7 @@ const tagClick = (event) => {
   <SpinLoader v-if="loading" />
   <h2 v-else-if="error">An Error Occurred</h2>
   <h2 v-else-if="filter.length === 0">No Items Were Found</h2>
-  <div v-else class="split">
+  <div v-else class="card-grid">
     <template v-for="(item, index) in filter" :key="index">
       <ArticleCard v-if="item.date" :article="item" />
       <ProjectCard v-else :project="item" />

@@ -22,7 +22,7 @@ const { data, loading, error } = useFetch(
   </h1>
   <SpinLoader v-if="loading" />
   <h2 v-else-if="error">An Error Occurred</h2>
-  <div v-else class="split">
+  <div v-else class="card-grid">
     <ArticleCard
       v-for="article in [...data.articles].reverse()"
       :key="article.id"

@@ -50,7 +50,7 @@ const latestProject = computed(() =>
     </p>
   </div>
 
-  <div class="split">
+  <div class="card-grid">
     <div>
       <h2><span class="primary">new</span> Article()</h2>
       <SpinLoader v-if="loadingArticle" />
