@@ -28,7 +28,9 @@ const {
   loading: loadingArticle,
   error: errorArticle,
 } = useFetch(
-  `${process.env.VUE_APP_SUPABASE_URL}/storage/v1/object/public/storage/data/blogStorage.json`,
+  `${
+    import.meta.env.VITE_SUPABASE_URL
+  }/storage/v1/object/public/storage/data/blogStorage.json`,
   "json"
 );
 const {
@@ -36,14 +38,16 @@ const {
   loading: loadingProject,
   error: errorProject,
 } = useFetch(
-  `${process.env.VUE_APP_SUPABASE_URL}/storage/v1/object/public/storage/data/projectStorage.json`,
+  `${
+    import.meta.env.VITE_SUPABASE_URL
+  }/storage/v1/object/public/storage/data/projectStorage.json`,
   "json"
 );
 
-const loading = computed((e) => loadingProject.value || loadingArticle.value);
-const error = computed((e) => errorProject.value || errorArticle.value);
-const articles = computed((e) => articleData.value?.articles || []);
-const projects = computed((e) => projectData.value?.projects || []);
+const loading = computed(() => loadingProject.value || loadingArticle.value);
+const error = computed(() => errorProject.value || errorArticle.value);
+const articles = computed(() => articleData.value?.articles || []);
+const projects = computed(() => projectData.value?.projects || []);
 const allTags = computed(() => {
   let output = [];
   for (let item of [...articles.value, ...projects.value]) {

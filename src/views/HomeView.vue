@@ -14,7 +14,9 @@ const {
   loading: loadingArticle,
   error: errorArticle,
 } = useFetch(
-  `${process.env.VUE_APP_SUPABASE_URL}/storage/v1/object/public/storage/data/blogStorage.json`,
+  `${
+    import.meta.env.VITE_SUPABASE_URL
+  }/storage/v1/object/public/storage/data/blogStorage.json`,
   "json"
 );
 const {
@@ -22,7 +24,9 @@ const {
   loading: loadingProject,
   error: errorProject,
 } = useFetch(
-  `${process.env.VUE_APP_SUPABASE_URL}/storage/v1/object/public/storage/data/projectStorage.json`,
+  `${
+    import.meta.env.VITE_SUPABASE_URL
+  }/storage/v1/object/public/storage/data/projectStorage.json`,
   "json"
 );
 const latestArticle = computed(() =>

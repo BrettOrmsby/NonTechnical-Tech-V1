@@ -22,7 +22,9 @@ const error = ref(false);
 
 onMounted(async () => {
   const response = await fetch(
-    `${process.env.VUE_APP_SUPABASE_URL}/storage/v1/object/public/storage/data/blogStorage.json`
+    `${
+      import.meta.env.VITE_SUPABASE_URL
+    }/storage/v1/object/public/storage/data/blogStorage.json`
   );
   if (!response.ok) {
     console.log(`An error has occurred: ${response.status}`);
@@ -42,7 +44,11 @@ onMounted(async () => {
   }
 
   const markdownResponse = await fetch(
-    `${process.env.VUE_APP_SUPABASE_URL}/storage/v1/object/public/storage/articles/${article.value.path}/markdown.md`
+    `${
+      import.meta.env.VITE_SUPABASE_URL
+    }/storage/v1/object/public/storage/articles/${
+      article.value.path
+    }/markdown.md`
   );
   if (!markdownResponse.ok) {
     console.log(`An error has occurred: ${markdownResponse.status}`);
@@ -62,7 +68,9 @@ const md2html = computed(() => {
       return hljs.highlight(code, { language }).value;
     },
     langPrefix: "hljs language-",
-    baseUrl: `${process.env.VUE_APP_SUPABASE_URL}/storage/v1/object/public/storage/articles/${article.value.path}/`,
+    baseUrl: `${
+      import.meta.env.VITE_SUPABASE_URL
+    }/storage/v1/object/public/storage/articles/${article.value.path}/`,
     headerPrefix: "",
   });
   return marked.parse(markdown.value);

@@ -10,7 +10,9 @@ import SpinLoader from "@/components/SpinLoader.vue";
 import { useFetch } from "@/composables/fetch.js";
 
 const { data, loading, error } = useFetch(
-  `${process.env.VUE_APP_SUPABASE_URL}/storage/v1/object/public/storage/data/blogStorage.json`,
+  `${
+    import.meta.env.VITE_SUPABASE_URL
+  }/storage/v1/object/public/storage/data/blogStorage.json`,
   "json"
 );
 </script>

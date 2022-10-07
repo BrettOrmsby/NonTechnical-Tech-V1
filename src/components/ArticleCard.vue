@@ -13,7 +13,11 @@ const props = defineProps(["article"]);
 // Prefix relative links
 const imageSrc = computed(() => {
   if (!props.article.image.startsWith("https://")) {
-    return `${process.env.VUE_APP_SUPABASE_URL}/storage/v1/object/public/storage/articles/${props.article.path}/${props.article.image}`;
+    return `${
+      import.meta.env.VITE_SUPABASE_URL
+    }/storage/v1/object/public/storage/articles/${props.article.path}/${
+      props.article.image
+    }`;
   }
   return props.article.image;
 });
