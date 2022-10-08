@@ -12,39 +12,32 @@ const routes = [
     path: "/articles",
     name: "articles",
     meta: { title: "Articles" },
-    component: () =>
-      import(/* webpackChunkName: "articles" */ "../views/ArticlesView.vue"),
+    component: () => import("../views/ArticlesView.vue"),
   },
   {
     path: "/projects",
     name: "projects",
     meta: { title: "Projects" },
-    component: () =>
-      import(/* webpackChunkName: "projects" */ "../views/ProjectsView.vue"),
+    component: () => import("../views/ProjectsView.vue"),
   },
   {
     path: "/search",
     name: "search",
     meta: { title: "Search" },
-    component: () =>
-      import(/* webpackChunkName: "search" */ "../views/SearchView.vue"),
+    component: () => import("../views/SearchView.vue"),
   },
   {
     path: "/article/:id",
     name: "article",
     meta: { title: "Article" },
     props: true,
-    component: () =>
-      import(
-        /* webpackChunkName: "article" */ "../views/ArticleRenderView.vue"
-      ),
+    component: () => import("../views/ArticleRenderView.vue"),
   },
   {
     path: "/404",
     name: "notFound",
     meta: { title: "404" },
-    component: () =>
-      import(/* webpackChunkName: "not found" */ "../views/NotFoundView.vue"),
+    component: () => import("../views/NotFoundView.vue"),
   },
   {
     path: "/:pathMatch(.*)*",
@@ -60,11 +53,11 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
+  next();
   window.scrollTo(0, 0);
   document.title = to.meta.title
     ? to.meta.title + " | NonTechnical Tech"
     : "NonTechnical Tech";
-  next();
 });
 
 export default router;
