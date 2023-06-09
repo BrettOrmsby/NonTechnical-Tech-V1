@@ -1,5 +1,8 @@
 # blog
 
+> **Warning**
+> This Project is not longer developed, see https://github.com/BrettOrmsby/non-technical-tech
+
 ## Project setup
 ```
 npm install
